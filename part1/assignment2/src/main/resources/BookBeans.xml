@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  
+	<bean id="978-0075536321" class="edu.morrison.spring.beans.Book">
+		<property name="id" value="1" />
+		<property name="isbn" value="978-0075536321" />
+		<property name="title" value="Anna Karenina" />
+		<property name="price" value="17.57" />
+	</bean>
+  
+	<bean id="978-0060194994" class="edu.morrison.spring.beans.Book">
+		<property name="id" value="1" />
+		<property name="isbn" value="978-0060194994" />
+		<property name="title" value="To Kill A Mockingbird" />
+		<property name="price" value="25.95" />
+	</bean>
+
+
+	<bean id="978-0137150021" class="edu.morrison.spring.beans.Book">
+		<property name="id" value="2" />
+		<property name="isbn" value="978-0137150021" />
+		<property name="title" value="Effective Java" />
+		<property name="price" value="43.86" />
+	</bean>
+
+	<bean id="978-0132350884" class="edu.morrison.spring.beans.Book">
+		<property name="id" value="2" />
+		<property name="isbn" value="978-0132350884" />
+		<property name="title" value="Clean Code" />
+		<property name="price" value="25.33" />
+	</bean>
+
+
+	<bean id="978-0571096343" class="edu.morrison.spring.beans.Book">
+		<property name="id" value="3" />
+		<property name="isbn" value="978-0571096343" />
+		<property name="title" value="The Waste Land by T.S. Eliot" />
+		<property name="price" value="200.00" />
+	</bean>
+
+	<bean id="978-0375505966" class="edu.morrison.spring.beans.Book">
+		<property name="id" value="3" />
+		<property name="isbn" value="978-0375505966" />
+		<property name="title" value="Still I Rise by Maya Angelou" />
+		<property name="price" value="30.29" />
+	</bean>
+
+  
+
+	<bean id="Novels" class="edu.morrison.spring.beans.Category">
+    <property name="id" value="1"></property>
+    <property name="name" value="Novels"></property>
+    <property name="booksSet">
+      <set>
+        <ref bean="978-0075536321" />
+        <ref bean="978-0060194994" />
+      </set>
+    </property>
+  </bean>
+	<bean id="Java" class="edu.morrison.spring.beans.Category">
+    <property name="id" value="2"></property>
+    <property name="name" value="Java"></property>
+    <property name="booksList">
+      <list>
+        <ref bean="978-0137150021" />
+        <ref bean="978-0132350884" />
+      </list>
+    </property>
+  </bean>
+	<bean id="Poetry" class="edu.morrison.spring.beans.Category">
+    <property name="id" value="3"></property>
+    <property name="name" value="Poetry"></property>
+    <property name="booksMap">
+      <map>
+        <entry key="1">
+          <ref bean="978-0571096343" />
+        </entry>
+        <entry key="2">
+          <ref bean="978-0375505966" />
+        </entry>
+      </map>
+    </property>
+  </bean>
+
+  
+</beans>
