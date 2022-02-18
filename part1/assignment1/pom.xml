@@ -9,7 +9,9 @@
 	<name>part1-assignment1</name>
 
 	<properties>
-		<springframework.version>5.1.8.RELEASE</springframework.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <springframework.version>5.1.8.RELEASE</springframework.version>
 		<slf4j.log4j.version>2.0.0-alpha0</slf4j.log4j.version>
 	</properties>
 
