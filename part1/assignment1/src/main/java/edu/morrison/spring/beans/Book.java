@@ -8,15 +8,14 @@ import org.springframework.stereotype.Component;
 @Component("book")
 public class Book {
 
-  private Long id;
-  private String isbn;
-  private String title;
-  private Float price;
+  private Long id = 0L;
+  private String isbn = "";
+  private String title = "";
+  private Float price = 0.0F;
 
   public Long getId() {
     return id;
   }
-  @Autowired
   public void setId(Long id) {
     this.id = id;
   }
@@ -24,7 +23,6 @@ public class Book {
   public String getIsbn() {
     return isbn;
   }
-  @Autowired
   public void setIsbn(String isbn) {
     this.isbn = isbn;
   }
@@ -32,7 +30,6 @@ public class Book {
   public String getTitle() {
     return title;
   }
-  @Autowired
   public void setTitle(String title) {
     this.title = title;
   }
@@ -40,7 +37,6 @@ public class Book {
   public Float getPrice() {
     return price;
   }
-  @Autowired
   public void setPrice(Float price) {
     this.price = price;
   }

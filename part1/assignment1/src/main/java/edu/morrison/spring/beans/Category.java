@@ -6,21 +6,22 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.ArrayList;
 
 
 @Component("category")
 public class Category {
 
-  private Long id = 0;
+  private Long id = 0L;
   private String name = "Unknown";
-  private Set<Book> booksSet = new Set<Book>();
-  private List<Book> booksList = new List<Book>();
-  private Map<String, Book> booksMap = new Map<String, Book>();
+  private Set<Book> booksSet = new HashSet<Book>();
+  private List<Book> booksList = new ArrayList<Book>();
+  private Map<String, Book> booksMap = Map.of();
 
   public Long getId() {
     return id;
   }
-  @Autowired
   public void setId(Long id) {
     this.id = id;
   }
@@ -28,7 +29,6 @@ public class Category {
   public String getName() {
     return name;
   }
-  @Autowired
   public void setName(String name) {
     this.name = name;
   }
@@ -36,7 +36,6 @@ public class Category {
   public Set<Book> getBooksSet() {
     return booksSet;
   }
-  @Autowired
   public void setBooksSet(Set<Book> booksSet) {
     this.booksSet = booksSet;
   }
@@ -44,7 +43,6 @@ public class Category {
   public List<Book> getBooksList() {
     return booksList;
   }
-  @Autowired
   public void setBooksList(List<Book> booksList) {
     this.booksList = booksList;
   }
@@ -52,7 +50,6 @@ public class Category {
   public Map<String, Book> getBooksMap() {
     return booksMap;
   }
-  @Autowired
   public void setBooksMap(Map<String, Book> booksMap) {
     this.booksMap = booksMap;
   }

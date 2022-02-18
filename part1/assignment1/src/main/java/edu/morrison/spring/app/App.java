@@ -19,8 +19,7 @@ public class App {
   private Category map;
 
   public static void main(String[] args) {
-		AbstractApplicationContext context = new AnnotationConfigApplicationContext(
-				AppConfig.class);
+		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		// ByType Autowiring
 		Book book = (Book)context.getBean("book");
