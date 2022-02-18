@@ -59,7 +59,7 @@ public class Category {
   public String toString() {
     String s = "";
     if (booksSet.size() > 0) {
-      s += "==============Books Set Output Start ===============================\n";
+      s += "\n==============Books Set Output Start ===============================\n";
       s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
 
       Iterator i = booksSet.iterator();
@@ -71,11 +71,11 @@ public class Category {
         }
       }
       s += "]\n";
-      s += "==============Books Set Output End ===============================\n";
+      s += "==============Books Set Output End =================================\n";
     }
 
     if (booksList.size() > 0) {
-      s += "==============Books List Output Start ===============================\n";
+      s += "\n==============Books List Output Start ===============================\n";
       s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
       Iterator i = booksList.iterator();
       while (i.hasNext()) {
@@ -86,11 +86,11 @@ public class Category {
         }
       }
       s += "]\n";
-      s += "==============Books List Output End ===============================\n";
+      s += "==============Books List Output End =================================\n";
     }
 
     if (booksMap.size() > 0) {
-      s += "==============Books Map Output Start ===============================\n";
+      s += "\n==============Books Map Output Start ===============================\n";
       s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
       Iterator i = booksMap.entrySet().iterator();
       while (i.hasNext()) {
@@ -103,7 +103,7 @@ public class Category {
         }
       }
       s += "]\n";
-      s += "==============Books Map Output End ===============================\n";
+      s += "==============Books Map Output End =================================\n";
     }
 
     return s;
