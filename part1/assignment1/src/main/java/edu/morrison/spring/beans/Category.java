@@ -59,7 +59,7 @@ public class Category {
   public String toString() {
     String s = "";
     if (booksSet.size() > 0) {
-      s += "\n==============Books Set Output Start ===============================\n";
+      s += "==============Books Set Output Start ===============================\n";
       s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
 
       Iterator i = booksSet.iterator();
@@ -75,7 +75,7 @@ public class Category {
     }
 
     if (booksList.size() > 0) {
-      s += "\n==============Books List Output Start ===============================\n";
+      s += "==============Books List Output Start ===============================\n";
       s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
       Iterator i = booksList.iterator();
       while (i.hasNext()) {
@@ -90,12 +90,14 @@ public class Category {
     }
 
     if (booksMap.size() > 0) {
-      s += "\n==============Books Map Output Start ===============================\n";
+      s += "==============Books Map Output Start ===============================\n";
       s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
       Iterator i = booksMap.entrySet().iterator();
+      Integer j = 1;
       while (i.hasNext()) {
         Map.Entry kv = (Map.Entry)i.next();
         String name = (String)kv.getKey();
+        s += "key" + name + "=";
         Book b = (Book)kv.getValue();
         s += b.toString();
         if (i.hasNext()) {

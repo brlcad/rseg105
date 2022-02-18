@@ -22,13 +22,16 @@ public class App {
 		context.load("BookBeans.xml");
 		context.refresh();
 
-    Category set = (Category)context.getBean("Novels");
-    Category list = (Category)context.getBean("Poetry");
-    Category map = (Category)context.getBean("Java");
+    Category novels = (Category)context.getBean("Novels");
+    Category java = (Category)context.getBean("Java");
+    Category poetry = (Category)context.getBean("Poetry");
 
-    logger.info(set.toString());
-    logger.info(list.toString());
-    logger.info(map.toString());
+    String s = "\n" +
+      novels.toString() +
+      java.toString() +
+      poetry.toString() +
+      "\n";
+    logger.info(s);
 
     // ByType Autowiring
 		// Book book = (Book)context.getBean("book");
