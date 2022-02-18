@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 @Component("category")
@@ -56,7 +57,56 @@ public class Category {
 
   @Override
   public String toString() {
-    return "This is also a test.";
+    String s = "";
+    if (booksSet.size() > 0) {
+      s += "==============Books Set Output Start ===============================\n";
+      s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
+
+      Iterator i = booksSet.iterator();
+      while (i.hasNext()) {
+        Book b = (Book)i.next();
+        s += b.toString();
+        if (i.hasNext()) {
+          s += ", ";
+        }
+      }
+      s += "]\n";
+      s += "==============Books Set Output End ===============================\n";
+    }
+
+    if (booksList.size() > 0) {
+      s += "==============Books List Output Start ===============================\n";
+      s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
+      Iterator i = booksList.iterator();
+      while (i.hasNext()) {
+        Book b = (Book)i.next();
+        s += b.toString();
+        if (i.hasNext()) {
+          s += ", ";
+        }
+      }
+      s += "]\n";
+      s += "==============Books List Output End ===============================\n";
+    }
+
+    if (booksMap.size() > 0) {
+      s += "==============Books Map Output Start ===============================\n";
+      s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
+      Iterator i = booksMap.entrySet().iterator();
+      while (i.hasNext()) {
+        Map.Entry kv = (Map.Entry)i.next();
+        String name = (String)kv.getKey();
+        Book b = (Book)kv.getValue();
+        s += b.toString();
+        if (i.hasNext()) {
+          s += ", ";
+        }
+      }
+      s += "]\n";
+      s += "==============Books Map Output End ===============================\n";
+    }
+
+    return s;
   }
 
 }

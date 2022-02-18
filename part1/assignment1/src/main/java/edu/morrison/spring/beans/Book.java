@@ -43,7 +43,8 @@ public class Book {
 
   @Override
   public String toString() {
-    return "This is a test";
+    	String s = "Book - Id: " + this.id + ", ISBN: " + this.isbn + ", Title: " + this.title + ", Price: "+ this.price;
+    	return s;
   }
 
 }

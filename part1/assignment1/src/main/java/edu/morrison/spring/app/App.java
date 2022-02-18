@@ -14,15 +14,21 @@ import edu.morrison.spring.beans.Category;
 public class App {
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 
-  private Category set;
-  private Category list;
-  private Category map;
-
   public static void main(String[] args) {
 		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		// ByType Autowiring
-		Book book = (Book)context.getBean("book");
-		logger.info("Book (By Type Autowiring): " + book);
+    Category set = (Category)context.getBean("Novels");
+    Category list = (Category)context.getBean("Java");
+    Category map = (Category)context.getBean("Poetry");
+
+    set.toString();
+    list.toString();
+    map.toString();
+
+    // ByType Autowiring
+		// Book book = (Book)context.getBean("book");
+		// logger.info("Book (By Type Autowiring): " + book);
+
+    context.close();
   }
 }
