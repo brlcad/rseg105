@@ -8,13 +8,9 @@ import org.springframework.stereotype.Component;
 @Component("book")
 public class Book {
 
-  @Autowired
   private Long id;
-  @Autowired
   private String isbn;
-  @Autowired
   private String title;
-  @Autowired
   private Float price;
 
   public Long getId() {

@@ -11,11 +11,11 @@ import java.util.Map;
 @Component("category")
 public class Category {
 
-  private Long id;
-  private String name;
-  private Set<Book> booksSet;
-  private List<Book> booksList;
-  private Map<String, Book> booksMap;
+  private Long id = 0;
+  private String name = "Unknown";
+  private Set<Book> booksSet = new Set<Book>();
+  private List<Book> booksList = new List<Book>();
+  private Map<String, Book> booksMap = new Map<String, Book>();
 
   public Long getId() {
     return id;
