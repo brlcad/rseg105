@@ -47,42 +47,4 @@
 		<property name="price" value="30.29" />
 	</bean>
 
-  
-
-	<bean id="Novels" class="edu.morrison.spring.beans.Category">
-    <property name="id" value="1"></property>
-    <property name="name" value="Novels"></property>
-    <property name="booksSet">
-      <set>
-        <ref bean="978-0075536321" />
-        <ref bean="978-0060194994" />
-      </set>
-    </property>
-  </bean>
-	<bean id="Java" class="edu.morrison.spring.beans.Category">
-    <property name="id" value="2"></property>
-    <property name="name" value="Java"></property>
-    <property name="booksList">
-      <list>
-        <ref bean="978-0137150021" />
-        <ref bean="978-0132350884" />
-      </list>
-    </property>
-  </bean>
-	<bean id="Poetry" class="edu.morrison.spring.beans.Category">
-    <property name="id" value="3"></property>
-    <property name="name" value="Poetry"></property>
-    <property name="booksMap">
-      <map>
-        <entry key="1">
-          <ref bean="978-0571096343" />
-        </entry>
-        <entry key="2">
-          <ref bean="978-0375505966" />
-        </entry>
-      </map>
-    </property>
-  </bean>
-
-  
 </beans>
