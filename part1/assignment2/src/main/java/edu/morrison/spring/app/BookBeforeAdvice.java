@@ -20,9 +20,8 @@ public class BookBeforeAdvice {
 		context.load("BookBeans.xml");
 		context.refresh();
 
-    // ByType Autowiring
-		Book book = (Book)context.getBean("book");
-		logger.info("Book (By Type Autowiring): " + book);
+		Book book = (Book)context.getBean("978-0075536321");
+		logger.info("Book: " + book);
 
     context.close();
   }
