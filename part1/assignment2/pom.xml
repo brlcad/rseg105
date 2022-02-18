@@ -50,7 +50,38 @@
 	        <configuration>
 	          <release>11</release>
 	        </configuration>
-	      </plugin>
+	    </plugin>
+      <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-shade-plugin</artifactId>
+		<version>3.1.0</version>
+		<executions>
+			<execution>
+				<phase>package</phase>
+				<id>aspect-oriented-programming</id>
+				<goals>
+					<goal>shade</goal>
+				</goals>
+				<configuration>
+					<transformers>
+					    <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+							<resource>META-INF/spring.handlers</resource>
+						</transformer>
+						<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+							<resource>META-INF/spring.schemas</resource>
+						</transformer>
+						<transformer
+							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<mainClass>edu.morrison.spring.app.BookThrowsAdvice</mainClass>
+							<mainClass>edu.morrison.spring.app.BookAfterReturningAdvice</mainClass>
+							<mainClass>edu.morrison.spring.app.BookBeforeAdvice</mainClass>
+						</transformer>
+					</transformers>
+<!--					<finalName>simple-around-advice</finalName>-->
+				</configuration>
+			</execution>
+		</executions>
+      </plugin>
 	    </plugins>  	    
 	 </build>	 
 </project>
