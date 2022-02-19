@@ -44,12 +44,24 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
     return jdbcTemplate.query(query, params, (result, rowNum) -> {
         Book book = new Book();
         book.setId(result.getLong("ID"));
+        book.setCategoryId(result.getLong("CATEGORY_ID"));
         book.setIsbn(result.getString("ISBN"));
         book.setTitle(result.getString("TITLE"));
         book.setPrice(result.getFloat("PRICE"));
         return book;
       });
       //new Object[]{name}, Book.class);
+  }
+
+
+  @Override
+  public void addBook(Book book) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("CATEGORY_ID", book.getCategoryId());
+    params.put("ISBN", book.getIsbn());
+    params.put("TITLE", book.getTitle());
+    params.put("PRICE", book.getPrice());
+    jdbcTemplate.update("INSERT INTO BOOK (CATEGORY_ID, ISBN, TITLE, PRICE) values (:CATEGORY_ID, :ISBN, :TITLE, :PRICE)", params);
   }
 
 

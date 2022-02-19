@@ -11,6 +11,7 @@ import java.util.List;
 
 //import edu.morrison.spring.beans.;
 import edu.morrison.spring.dao.CategoryDao;
+import edu.morrison.spring.beans.Book;
 
 
 public class FindBookCategoryJdbcApp {
@@ -25,6 +26,14 @@ public class FindBookCategoryJdbcApp {
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
     logger.info("Searching for book category:" + categoryDao.findBookByCategoryName("Poetry"));
+
+    Book book = new Book();
+    book.setCategoryId(3L);
+    book.setIsbn("978-0367505035");
+    book.setTitle("Fundamentals of Computer Graphics");
+    book.setPrice(126.0F);
+
+    categoryDao.addBook(book);
 
         /*
         // find all books by category name
