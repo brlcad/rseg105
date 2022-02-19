@@ -35,7 +35,7 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
   @Override
   public String findBookByCategoryName(String name) {
-    return jdbcTemplate.queryForObject("SELECT * FROM CATEGORY WHERE NAME = '?'", new Object[]{name}, String.class);
+    return jdbcTemplate.queryForObject("SELECT NAME FROM CATEGORY WHERE NAME = ?", new Object[]{name}, String.class);
   }
 
 
