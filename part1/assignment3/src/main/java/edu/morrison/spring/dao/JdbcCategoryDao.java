@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.morrison.spring.app.MySQLErrorCodesTranslator;
 
-//import java.util.HashMap;
+import java.util.List;
 
 
 public class JdbcCategoryDao implements CategoryDao, InitializingBean {
@@ -35,7 +35,7 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
   @Override
   public String findBookByCategoryName(String name) {
-    return jdbcTemplate.queryForObject("SELECT NAME FROM CATEGORY WHERE NAME = ?", new Object[]{name}, String.class);
+    return jdbcTemplate.queryForObject("SELECT TITLE FROM BOOK,CATEGORY WHERE BOOK.CATEGORY_ID=CATEGORY.ID and NAME = ? LIMIT 1", new Object[]{name}, String.class);
   }
 
 
