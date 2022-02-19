@@ -9,7 +9,6 @@ import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-//import edu.morrison.spring.beans.;
 import edu.morrison.spring.dao.CategoryDao;
 import edu.morrison.spring.beans.Book;
 
@@ -25,7 +24,8 @@ public class FindBookCategoryJdbcApp {
 
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
-    logger.info("Searching for book category:" + categoryDao.findBookByCategoryName("Poetry"));
+    List<Book> books = categoryDao.findBooksByCategoryName("Poetry");
+    logger.info("Searching for book category:" + books);
 
     Book book = new Book();
     book.setIsbn("978-0367505035");
@@ -33,6 +33,19 @@ public class FindBookCategoryJdbcApp {
     book.setPrice(126.0F);
 
     categoryDao.addBook(book, "Programming");
+
+    logger.info("Searching for book category:" + categoryDao.findBooksByCategoryName("Programming"));
+
+    book.setTitle("Fundamentals of Computer Graphics, v5");
+    book.setPrice(125.99F);
+
+    categoryDao.updateBook(book);
+
+    logger.info("Searching for book category:" + categoryDao.findBooksByCategoryName("Programming"));
+
+    categoryDao.deleteBook(book.getId());
+
+    logger.info("Searching for book category:" + categoryDao.findBooksByCategoryName("Programming"));
 
         /*
         // find all books by category name
