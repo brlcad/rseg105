@@ -55,9 +55,20 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
 
   @Override
-  public void addBook(Book book) {
+  public Long getCategoryID(String name) {
+    String query = "SELECT ID FROM CATEGORY WHERE NAME = :name LIMIT 1";
     Map<String, Object> params = new HashMap<>();
-    params.put("CATEGORY_ID", book.getCategoryId());
+    params.put("name", name);
+    return jdbcTemplate.queryForObject(query, params, Long.class);
+  }
+
+  @Override
+  public void addBook(Book book, String category) {
+
+    Long catId = getCategoryID(category);
+
+    Map<String, Object> params = new HashMap<>();
+    params.put("CATEGORY_ID", catId);
     params.put("ISBN", book.getIsbn());
     params.put("TITLE", book.getTitle());
     params.put("PRICE", book.getPrice());

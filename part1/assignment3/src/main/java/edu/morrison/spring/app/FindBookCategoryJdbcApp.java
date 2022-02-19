@@ -28,12 +28,11 @@ public class FindBookCategoryJdbcApp {
     logger.info("Searching for book category:" + categoryDao.findBookByCategoryName("Poetry"));
 
     Book book = new Book();
-    book.setCategoryId(3L);
     book.setIsbn("978-0367505035");
     book.setTitle("Fundamentals of Computer Graphics");
     book.setPrice(126.0F);
 
-    categoryDao.addBook(book);
+    categoryDao.addBook(book, "Programming");
 
         /*
         // find all books by category name
