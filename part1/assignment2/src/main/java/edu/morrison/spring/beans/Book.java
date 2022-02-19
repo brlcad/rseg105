@@ -4,9 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Component("book")
 public class Book {
+	private static final Logger logger = LoggerFactory.getLogger(Book.class);
 
   private Long id = 0L;
   private String isbn = "";
@@ -39,6 +43,13 @@ public class Book {
   }
   public void setPrice(Float price) {
     this.price = price;
+  }
+
+  public void reading() {
+    logger.info("Reading " + title + " book");
+  }
+  public void throwException() {
+    throw new RuntimeException("Book Bean Exception");
   }
 
   @Override
