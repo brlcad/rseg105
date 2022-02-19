@@ -11,21 +11,85 @@ import java.util.List;
 
 import edu.morrison.spring.dao.CategoryDao;
 import edu.morrison.spring.beans.Book;
+import edu.morrison.spring.beans.Category;
 
 
 public class FindBookCategoryJdbcApp {
 
+  private static GenericXmlApplicationContext context = new GenericXmlApplicationContext();
   private static Logger logger = LoggerFactory.getLogger(FindBookCategoryJdbcApp.class);
 
   public static void main(String... args) {
-    GenericXmlApplicationContext context = new GenericXmlApplicationContext();
     context.load("classpath:spring/app-context-xml.xml");
     context.refresh();
 
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
-    List<Book> books = categoryDao.findBooksByCategoryName("Poetry");
-    logger.info("Searching for book category:" + books);
+    logger.info("============== Start of Find All Books By Category =====================");
+
+    demoPrinting();
+    demoAddingBook();
+    demoModifyingBook();
+    demoDeletingBook();
+
+    logger.info("============== End of Find All Books By Category =====================");
+
+    context.close();
+  }
+
+
+  private static void demoDeletingBook() {
+    logger.info("-------------- Deleting a book -------------------------------");
+
+    CategoryDao categoryDao = context.getBean(CategoryDao.class);
+
+    logger.info("Programming books BEFORE delete:");
+    printBooks("Programming");
+
+    List<Book> books = categoryDao.listBooksByCategoryName("Programming");
+    if (books.size() < 1) {
+      logger.warn("Oops, something went horribly wrong getting a book to delete.");
+      return;
+    }
+    /* assume we can update the last one */
+    categoryDao.deleteBook(books.get(books.size()-1).getId());
+
+    logger.info("Programming books AFTER delete:");
+    printBooks("Programming");
+  }
+
+
+  private static void demoModifyingBook() {
+    logger.info("-------------- Modifying a book -------------------------------");
+
+    CategoryDao categoryDao = context.getBean(CategoryDao.class);
+
+    logger.info("Programming books BEFORE modify:");
+    printBooks("Programming");
+
+    List<Book> books = categoryDao.listBooksByTitle("Fundamentals of Computer Graphics");
+    if (books.size() < 1) {
+      logger.warn("Oops, something went horribly wrong getting a book to delete.");
+      return;
+    }
+
+    books.get(0).setTitle("Fundamentals of Computer Graphics, v5");
+    books.get(0).setPrice(125.99F);
+
+    categoryDao.updateBook(books.get(0));
+
+    logger.info("Programming books AFTER modify:");
+    printBooks("Programming");
+  }
+
+
+  private static void demoAddingBook() {
+    logger.info("-------------- Adding a book ----------------------------------");
+
+    CategoryDao categoryDao = context.getBean(CategoryDao.class);
+
+    logger.info("Programming books BEFORE add:");
+    printBooks("Programming");
 
     Book book = new Book();
     book.setIsbn("978-0367505035");
@@ -34,40 +98,36 @@ public class FindBookCategoryJdbcApp {
 
     categoryDao.addBook(book, "Programming");
 
-    logger.info("Searching for book category:" + categoryDao.findBooksByCategoryName("Programming"));
-
-    book.setTitle("Fundamentals of Computer Graphics, v5");
-    book.setPrice(125.99F);
-
-    categoryDao.updateBook(book);
-
-    logger.info("Searching for book category:" + categoryDao.findBooksByCategoryName("Programming"));
-
-    categoryDao.deleteBook(book.getId());
-
-    logger.info("Searching for book category:" + categoryDao.findBooksByCategoryName("Programming"));
-
-        /*
-        // find all books by category name
-
-        // add and save a new book with a category name
-
-        // update some data describing this book
-
-        // delete this book
-        */
-
-    context.close();
+    logger.info("Programming books AFTER add:");
+    printBooks("Programming");
   }
 
 
-  /*
-    private static void listAllCategories() {
-        List<Category> categories = categoryDao.findAll();
+  private static void demoPrinting() {
+    logger.info("-------------- Listing Poetry BOOKS -----------------------------");
+    printBooks("Poetry");
 
-        for (Category category: categories) {
-            logger.info(category.toString());
-        }
+    logger.info("-------------- Listing CATEGORIES -----------------------------");
+    printCategories();
+  }
+
+
+  private static void printBooks(String category) {
+    CategoryDao categoryDao = context.getBean(CategoryDao.class);
+
+    List<Book> books = categoryDao.listBooksByCategoryName(category);
+    for (Book book: books) {
+      logger.info(book.toString());
     }
-  */
+  }
+
+
+  private static void printCategories() {
+    CategoryDao categoryDao = context.getBean(CategoryDao.class);
+
+    List<Category> categories = categoryDao.listCategories();
+    for (Category category: categories) {
+      logger.info(category.getName());
+    }
+  }
 }
