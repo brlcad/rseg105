@@ -30,7 +30,7 @@ public class FindBookCategoryJdbcApp {
     logger.info("Usage: " + args[0] + " [1234]");
     logger.info("");
     logger.info("This is a demonstration of reading and writing to a database using Spring JDBC.");
-    logger.info("Specify a number to halt after each step in order to inspect the database.");
+    logger.info("Specify a number to halt after each demo step in order to inspect the database.");
     logger.info("");
 
     if (args.length > 1) {
