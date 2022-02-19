@@ -41,8 +41,6 @@ public class FindBookCategoryJdbcApp {
       return;
     }
 
-    CategoryDao categoryDao = context.getBean(CategoryDao.class);
-
     logger.info("============== Start of Find Books By Category =====================");
 
     if (step > 0)
