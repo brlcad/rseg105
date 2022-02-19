@@ -1,7 +1,7 @@
 package edu.morrison.spring.app;
 
-import edu.morrison.spring.beans.Book;
-import edu.morrison.spring.dao.BookDao;
+//import edu.morrison.spring.beans.Book;
+//import edu.morrison.spring.dao.BookDao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +12,10 @@ import java.util.List;
 
 public class FindBookCategoryJdbcApp {
   //    private static CategoryDao categoryDao = new CategoryDao();
-  //    private static Logger logger = LoggerFactory.getLogger(FindBookCategoryJdbcDemo.class);
+  private static Logger logger = LoggerFactory.getLogger(FindBookCategoryJdbcApp.class);
 
-    public static void main(String... args) {
-        logger.info("Searching for book category:");
+  public static void main(String... args) {
+    logger.info("Searching for book category:");
 
         /*
         // find all books by category name
@@ -48,7 +48,7 @@ public class FindBookCategoryJdbcApp {
 
         listAllCategories();
         */
-    }
+  }
 
 
   /*
