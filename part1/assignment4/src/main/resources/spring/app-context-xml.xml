@@ -22,6 +22,7 @@
 		<property name="maxIdle"     value="5" />
     </bean> 
 
-	<!-- define the categoryDao bean -->  
+	<!-- define the categoryDao bean
     <bean id="categoryDao" class="edu.morrison.spring.dao.JdbcCategoryDao" p:dataSource-ref="dataSource"/> 
+-->
 </beans>

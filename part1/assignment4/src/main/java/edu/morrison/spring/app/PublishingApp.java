@@ -16,7 +16,7 @@ import edu.morrison.spring.beans.Category;
 public class PublishingApp {
 
   private static GenericXmlApplicationContext context = new GenericXmlApplicationContext();
-  private static Logger logger = LoggerFactory.getLogger(FindBookCategoryJdbcApp.class);
+  private static Logger logger = LoggerFactory.getLogger(PublishingApp.class);
 
   public static void main(String... args) {
     Integer step = 4;
