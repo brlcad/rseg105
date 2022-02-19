@@ -35,8 +35,7 @@ public class BookBeforeAdvice implements MethodBeforeAdvice {
   }
 
   @Override
-  public void before(Method method, Object[] args, Object target)
-    throws Throwable {
+  public void before(Method method, Object[] args, Object target) throws Throwable {
     logger.info("Before '" + method.getName() + "' buy the book.");
   }
 }
