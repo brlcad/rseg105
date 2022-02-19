@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import edu.morrison.spring.beans.Book;
+import edu.morrison.spring.beans.Category;
 import edu.morrison.spring.app.MySQLErrorCodesTranslator;
 
 
@@ -42,7 +43,19 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
 
   @Override
-  public List<Book> findBooksByCategoryName(String name) {
+  public List<Category> listCategories() {
+    String query = "SELECT * FROM CATEGORY";
+    return jdbcTemplate.query(query, (result, rowNum) -> {
+        Category category = new Category();
+        category.setId(result.getLong("ID"));
+        category.setName(result.getString("NAME"));
+        return category;
+      });
+  }
+
+
+  @Override
+  public List<Book> listBooksByCategoryName(String name) {
     String query = "SELECT * FROM BOOK,CATEGORY WHERE BOOK.CATEGORY_ID=CATEGORY.ID and NAME = :name";
     Map<String, Object> params = new HashMap<>();
     params.put("name", name);
@@ -59,7 +72,24 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
 
   @Override
-  public Long getCategoryID(String name) {
+  public List<Book> listBooksByTitle(String title) {
+    String query = "SELECT * FROM BOOK WHERE TITLE = :title";
+    Map<String, Object> params = new HashMap<>();
+    params.put("title", title);
+    return jdbcTemplate.query(query, params, (result, rowNum) -> {
+        Book book = new Book();
+        book.setId(result.getLong("ID"));
+        book.setCategoryId(result.getLong("CATEGORY_ID"));
+        book.setIsbn(result.getString("ISBN"));
+        book.setTitle(result.getString("TITLE"));
+        book.setPrice(result.getFloat("PRICE"));
+        return book;
+      });
+  }
+
+
+  @Override
+  public Long lookupCategoryIdByName(String name) {
     String query = "SELECT ID FROM CATEGORY WHERE NAME = :name LIMIT 1";
     Map<String, Object> params = new HashMap<>();
     params.put("name", name);
@@ -72,7 +102,7 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
     Long catId = 0L;
     try {
-      catId = getCategoryID(category);
+      catId = lookupCategoryIdByName(category);
     } catch (Exception e) {
       /* NOTE: ignoring unknown categories for now, but could add them
        * as a new category or throw an error back to the caller
