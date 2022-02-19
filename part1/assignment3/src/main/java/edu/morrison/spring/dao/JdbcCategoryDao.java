@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 //import java.util.HashMap;
 
+
 @Repository("categoryDao")
 public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
@@ -15,5 +16,13 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
   @Override
   public String findBookByCategoryName(String name) {
+    return "";
+  }
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    if (namedParameterJdbcTemplate == null) {
+      throw new BeanCreationException("Null NamedParameterJdbcTemplate on CategoryDao");
+    }
   }
 }
