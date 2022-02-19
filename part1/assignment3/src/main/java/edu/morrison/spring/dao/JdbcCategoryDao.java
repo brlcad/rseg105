@@ -31,10 +31,10 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
     this.dataSource = dataSource;
 
     NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-    //    jdbcTemplate.setDataSource(dataSource);
 
     MySQLErrorCodesTranslator errorTrans = new MySQLErrorCodesTranslator();
     errorTrans.setDataSource(dataSource);
+    // NamedParameterJdbcTemplates don't appear to have an exception translator
     //    jdbcTemplate.setExceptionTranslator(errorTrans);
 
     this.jdbcTemplate = jdbcTemplate;
@@ -55,7 +55,6 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
         book.setPrice(result.getFloat("PRICE"));
         return book;
       });
-      //new Object[]{name}, Book.class);
   }
 
 
@@ -98,7 +97,7 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
     params.put("ISBN", book.getIsbn());
     params.put("TITLE", book.getTitle());
     params.put("PRICE", book.getPrice());
-    jdbcTemplate.update("UPDATE BOOK SET CATEGORY_ID = :CATEGORY_ID, ISBN = :ISBN, TITLE = :TITLE, PRICE = :PRICE) WHERE ID = :ID", params);
+    jdbcTemplate.update("UPDATE BOOK SET CATEGORY_ID = :CATEGORY_ID, ISBN = :ISBN, TITLE = :TITLE, PRICE = :PRICE WHERE ID = :ID", params);
   }
 
 
@@ -109,7 +108,7 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
     jdbcTemplate.update("DELETE FROM BOOK WHERE ID = :ID", params);
   }
 
-  
+
   @Override
   public void afterPropertiesSet() throws Exception {
     if (jdbcTemplate == null) {
