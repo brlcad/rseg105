@@ -1,12 +1,9 @@
 package edu.morrison.spring.beans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import java.io.Serializable;
 
 
-@Component("book")
-public class Book {
+public class Book implements Serializable {
 
   private Long id = 0L;
   private String isbn = "";
