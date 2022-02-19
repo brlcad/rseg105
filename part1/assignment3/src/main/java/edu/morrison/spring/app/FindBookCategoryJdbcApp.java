@@ -20,19 +20,41 @@ public class FindBookCategoryJdbcApp {
   private static Logger logger = LoggerFactory.getLogger(FindBookCategoryJdbcApp.class);
 
   public static void main(String... args) {
+    Integer step = 4;
     context.load("classpath:spring/app-context-xml.xml");
     context.refresh();
 
+    logger.info("Find Book by Category Spring JDBC Demo");
+    logger.info("v0.0.1 by C.S. Morrison");
+    logger.info("");
+    logger.info("Usage: " + args[0] + " [1234]");
+    logger.info("");
+    logger.info("This is a demonstration of reading and writing to a database using Spring JDBC.");
+    logger.info("Specify a number to halt after each step in order to inspect the database.");
+    logger.info("");
+
+    if (args.length > 1) {
+      step = Integer.parseInt(args[1]);
+    }
+    if (step < 0) {
+      logger.error("Expecting no argument or step number after " + args[0]);
+      return;
+    }
+
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
-    logger.info("============== Start of Find All Books By Category =====================");
+    logger.info("============== Start of Find Books By Category =====================");
 
-    demoPrinting();
-    demoAddingBook();
-    demoModifyingBook();
-    demoDeletingBook();
+    if (step > 0)
+      demoPrinting();
+    if (step > 1)
+      demoAddingBook();
+    if (step > 2)
+      demoModifyingBook();
+    if (step > 3)
+      demoDeletingBook();
 
-    logger.info("============== End of Find All Books By Category =====================");
+    logger.info("============== End of Find Books By Category =====================");
 
     context.close();
   }
