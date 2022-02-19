@@ -61,7 +61,7 @@ public class FindBookCategoryJdbcApp {
 
 
   private static void demoDeletingBook() {
-    logger.info("-------------- Deleting a book -------------------------------");
+    logger.info("------- Demo 1: Deleting a book -------------------------------");
 
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
@@ -82,7 +82,7 @@ public class FindBookCategoryJdbcApp {
 
 
   private static void demoModifyingBook() {
-    logger.info("-------------- Modifying a book -------------------------------");
+    logger.info("------- Demo 3: Modifying a book -------------------------------");
 
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
@@ -106,7 +106,7 @@ public class FindBookCategoryJdbcApp {
 
 
   private static void demoAddingBook() {
-    logger.info("-------------- Adding a book ----------------------------------");
+    logger.info("------- Step 2: Adding a book ----------------------------------");
 
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
@@ -126,10 +126,14 @@ public class FindBookCategoryJdbcApp {
 
 
   private static void demoPrinting() {
-    logger.info("-------------- Listing Poetry BOOKS -----------------------------");
+    logger.info("------- Step 1: Printing books and categories ------------------");
+    logger.info("All Books:");
+    printBooks(null);
+
+    logger.info("Poetry Books:");
     printBooks("Poetry");
 
-    logger.info("-------------- Listing CATEGORIES -----------------------------");
+    logger.info("All Categories:");
     printCategories();
   }
 
@@ -139,7 +143,7 @@ public class FindBookCategoryJdbcApp {
 
     List<Book> books = categoryDao.listBooksByCategoryName(category);
     for (Book book: books) {
-      logger.info(book.toString());
+      logger.info("  " + book.toString());
     }
   }
 
@@ -149,7 +153,7 @@ public class FindBookCategoryJdbcApp {
 
     List<Category> categories = categoryDao.listCategories();
     for (Category category: categories) {
-      logger.info(category.getName());
+      logger.info("  " + category.getName());
     }
   }
 }
