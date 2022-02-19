@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import edu.morrison.spring.beans.Book;
 import edu.morrison.spring.app.MySQLErrorCodesTranslator;
@@ -36,8 +38,10 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
   @Override
   public List<Book> findBookByCategoryName(String name) {
-    String query = "SELECT * FROM BOOK,CATEGORY WHERE BOOK.CATEGORY_ID=CATEGORY.ID and NAME = '" + name + "'";
-    return jdbcTemplate.query(query, (result, rowNum) -> {
+    String query = "SELECT * FROM BOOK,CATEGORY WHERE BOOK.CATEGORY_ID=CATEGORY.ID and NAME = :name";
+    Map<String, Object> params = new HashMap<>();
+    params.put("name", name);
+    return jdbcTemplate.query(query, params, (result, rowNum) -> {
         Book book = new Book();
         book.setId(result.getLong("ID"));
         book.setIsbn(result.getString("ISBN"));
