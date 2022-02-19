@@ -56,7 +56,12 @@ public class JdbcCategoryDao implements CategoryDao, InitializingBean {
 
   @Override
   public List<Book> listBooksByCategoryName(String name) {
-    String query = "SELECT * FROM BOOK,CATEGORY WHERE BOOK.CATEGORY_ID=CATEGORY.ID and NAME = :name";
+    String query;
+    if (name == null) {
+      query = "SELECT * FROM BOOK,CATEGORY WHERE BOOK.CATEGORY_ID=CATEGORY.ID";
+    } else {
+      query = "SELECT * FROM BOOK,CATEGORY WHERE BOOK.CATEGORY_ID=CATEGORY.ID and NAME = :name";
+    }
     Map<String, Object> params = new HashMap<>();
     params.put("name", name);
     return jdbcTemplate.query(query, params, (result, rowNum) -> {
