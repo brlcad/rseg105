@@ -3,6 +3,8 @@ package edu.morrison.spring.app;
 //import edu.morrison.spring.beans.Book;
 //import edu.morrison.spring.dao.BookDao;
 
+import org.springframework.context.support.GenericXmlApplicationContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,11 +12,16 @@ import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+
 public class FindBookCategoryJdbcApp {
   //    private static CategoryDao categoryDao = new CategoryDao();
   private static Logger logger = LoggerFactory.getLogger(FindBookCategoryJdbcApp.class);
 
   public static void main(String... args) {
+    GenericXmlApplicationContext context = new GenericXmlApplicationContext();
+    context.load("classpath:spring/app-context-xml.xml");
+    context.refresh();
+
     logger.info("Searching for book category:");
 
         /*
@@ -48,6 +55,8 @@ public class FindBookCategoryJdbcApp {
 
         listAllCategories();
         */
+
+    context.close();
   }
 
 
