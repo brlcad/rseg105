@@ -1,28 +1,33 @@
 package edu.morrison.spring.beans;
 
-import java.io.Serializable;
+import javax.persistence.*;
+
+import edu.morrison.spring.beans.Category;
 
 
-public class Book implements Serializable {
+@Entity
+@Table
+public class Book extends AbstractEntity {
 
-  private Long id = 0L;
-  private Long categoryId = 0L;
-  private String isbn = "";
-  private String title = "";
-  private Float price = 0.0F;
+  @ManyToOne
+  @JoinColumn(name = "CATEGORY_ID")
+  private Category category;
 
-  public Long getId() {
-    return id;
+  @Column
+  private String isbn;
+
+  @Column
+  private String title;
+
+  @Column
+  private Float price;
+
+
+  public Category getCategory() {
+    return category;
   }
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Long getCategoryId() {
-    return categoryId;
-  }
-  public void setCategoryId(Long id) {
-    this.categoryId = id;
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
   public String getIsbn() {
@@ -48,8 +53,27 @@ public class Book implements Serializable {
 
   @Override
   public String toString() {
-    	String s = "Book - Id: " + this.id + ", Category Id: " + this.categoryId + ", ISBN: " + this.isbn + ", Title: " + this.title + ", Price: "+ this.price;
-    	return s;
+    String s = "Book - Id: " + this.id + ", Category Id: " + this.category.getId() + ", ISBN: " + this.isbn + ", Title: " + this.title + ", Price: "+ this.price;
+    return s;
   }
 
+	@Override public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		Book book = (Book) o;
+		if (title != null ? !title.equals(book.title) : book.title != null)
+			return false;
+		return isbn != null ? isbn.equals(book.isbn) : book.isbn == null;
+	}
+
+	@Override public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (title != null ? title.hashCode() : 0);
+		result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
+		return result;
+	}
 }
