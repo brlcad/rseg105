@@ -3,13 +3,6 @@ package edu.morrison.spring.app;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import edu.morrison.spring.beans.Book;
-import edu.morrison.spring.beans.Category;
-
 
 public class PublishingApp {
 
