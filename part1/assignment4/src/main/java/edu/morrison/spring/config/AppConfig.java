@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:db/spring.properties")
+@PropertySource("classpath:spring/jdbc.properties")
 @ComponentScan(basePackages = "edu.morrison.spring")
 @EnableTransactionManagement
 public class AppConfig {

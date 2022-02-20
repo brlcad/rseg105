@@ -8,11 +8,12 @@ import org.springframework.context.support.GenericApplicationContext;
 import edu.morrison.spring.beans.Book;
 import edu.morrison.spring.beans.Category;
 import edu.morrison.spring.config.AppConfig;
+import edu.morrison.spring.dao.CategoryDao;
 
 
 public class PublishingApp {
 
-  private GenericApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+  private static GenericApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
   private static Logger logger = LoggerFactory.getLogger(PublishingApp.class);
 
   public static void main(String... args) {
@@ -105,7 +106,8 @@ public class PublishingApp {
     logger.info("All Categories:");
     printCategories();
 
-    Category categoryById = categoryDao.findBookWithAuthorAndCategoryById(1L);
+		CategoryDao categoryDao = ctx.getBean(CategoryDao.class);
+    Category categoryById = categoryDao.findCategoryWithAuthorAndBooksById(1L);
     logger.info("FOUND CATEGORY 1: " + categoryById.toString());
     if (categoryById.getBooks() != null) {
       categoryById.getBooks().forEach(book -> logger.info("\t" + book.toString()));
