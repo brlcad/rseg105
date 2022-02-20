@@ -3,6 +3,7 @@ package edu.morrison.spring.beans;
 import javax.persistence.*;
 
 import edu.morrison.spring.beans.Category;
+import edu.morrison.spring.beans.Author;
 
 
 @Entity
@@ -21,7 +22,6 @@ public class Book extends AbstractEntity {
 
   @Column
   private Float price;
-
 
   public Category getCategory() {
     return category;
@@ -50,6 +50,13 @@ public class Book extends AbstractEntity {
   public void setPrice(Float price) {
     this.price = price;
   }
+
+  @ManyToMany
+  @JoinTable(name = "AUTHOR_BOOK",
+             joinColumns = @JoinColumn(name = "BOOK_ID"),
+             inverseJoinColumns = @JoinColumn(name = "AUTHOR_ID"))
+  private Set<Author> authors = new HashSet<>();
+
 
   @Override
   public String toString() {

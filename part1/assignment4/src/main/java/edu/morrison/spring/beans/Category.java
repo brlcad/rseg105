@@ -1,29 +1,35 @@
 package edu.morrison.spring.beans;
 
-import java.util.Set;
-import java.util.List;
-import java.util.Map;
-import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.Iterator;
-
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import edu.morrison.spring.beans.Book;
 
 
-public class Category implements Serializable {
+@Entity
+@Table
+@NamedQueries({
+    @NamedQuery(name=Category.FIND_BOOK_WITH_AUTHORS_CATEGORY_BY_ID,
+                query="SELECT DISTINCT b FROM BOOK b " +
+                "LEFT JOIN FETCH b.AUTHORS a " +
+                "LEFT JOIN FETCH b.CATEGORY c " +
+                "WHERE b.id = :id"
+                )
+      /* !!! need more */
+  })
+public class Category extends AbstractEntity {
 
-  private Long id = 0L;
-  private String name = "Unknown";
-  private Set<Book> booksSet = new HashSet<Book>();
-  private List<Book> booksList = new ArrayList<Book>();
-  private Map<String, Book> booksMap = Map.of();
+  public statid final String FIND_BOOK_WITH_AUTHORS_CATEGORY_BY_ID = "Category.findBookWithAuthorsCategoryById";
 
-  public Long getId() {
-    return id;
-  }
-  public void setId(Long id) {
-    this.id = id;
-  }
+  @Column
+  private String name;
+
+  @OneToMany(mappedBy = "category", cascade=CascadeType.ALL,
+             orphanRemoval=true)
+  private Set<Book> books = new HashSet<>();
 
   public String getName() {
     return name;
@@ -55,58 +61,7 @@ public class Category implements Serializable {
 
   @Override
   public String toString() {
-    String s = "";
-    if (booksSet.size() > 0) {
-      s += "==============Books Set Output Start ===============================\n";
-      s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
-
-      Iterator i = booksSet.iterator();
-      while (i.hasNext()) {
-        Book b = (Book)i.next();
-        s += b.toString();
-        if (i.hasNext()) {
-          s += ", ";
-        }
-      }
-      s += "]\n";
-      s += "==============Books Set Output End =================================\n";
-    }
-
-    if (booksList.size() > 0) {
-      s += "==============Books List Output Start ===============================\n";
-      s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
-      Iterator i = booksList.iterator();
-      while (i.hasNext()) {
-        Book b = (Book)i.next();
-        s += b.toString();
-        if (i.hasNext()) {
-          s += ", ";
-        }
-      }
-      s += "]\n";
-      s += "==============Books List Output End =================================\n";
-    }
-
-    if (booksMap.size() > 0) {
-      s += "==============Books Map Output Start ===============================\n";
-      s += "Category -- Id: " + this.id + ", Name: " + this.name + ", Books List: [";
-      Iterator i = booksMap.entrySet().iterator();
-      Integer j = 1;
-      while (i.hasNext()) {
-        Map.Entry kv = (Map.Entry)i.next();
-        String name = (String)kv.getKey();
-        s += "key" + name + "=";
-        Book b = (Book)kv.getValue();
-        s += b.toString();
-        if (i.hasNext()) {
-          s += ", ";
-        }
-      }
-      s += "]\n";
-      s += "==============Books Map Output End =================================\n";
-    }
-
-    return s;
+    return String.format("Category - id: %d, Name: %s", id, name);
   }
 
 }
