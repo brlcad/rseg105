@@ -56,7 +56,7 @@ public class AppConfig {
 		hibernateProp.put("hibernate.format_sql", true);
 		hibernateProp.put("hibernate.id.new_generator_mappings", false);
 		hibernateProp.put("hibernate.use_sql_comments", true);
-		hibernateProp.put("hibernate.show_sql", false);
+		hibernateProp.put("hibernate.show_sql", true);
 		hibernateProp.put("hibernate.max_fetch_depth", 3);
 		hibernateProp.put("hibernate.jdbc.batch_size", 10);
 		hibernateProp.put("hibernate.jdbc.fetch_size", 50);
@@ -66,7 +66,7 @@ public class AppConfig {
 	@Bean public SessionFactory sessionFactory() throws IOException {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSource());
-		sessionFactoryBean.setPackagesToScan("com.apress.prospring5.ch7.entities");
+		sessionFactoryBean.setPackagesToScan("edu.morrison.spring");
 		sessionFactoryBean.setHibernateProperties(hibernateProperties());
 		sessionFactoryBean.afterPropertiesSet();
 		return sessionFactoryBean.getObject();
