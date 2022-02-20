@@ -5,7 +5,6 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.morrison.spring.dao.CategoryDao;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+import edu.morrison.spring.dao.CategoryDao;
 import edu.morrison.spring.beans.Book;
 import edu.morrison.spring.beans.Category;
 import edu.morrison.spring.app.MySQLErrorCodesTranslator;
