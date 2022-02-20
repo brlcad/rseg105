@@ -20,7 +20,7 @@ public class FindBookCategoryJdbcApp {
   private static Logger logger = LoggerFactory.getLogger(FindBookCategoryJdbcApp.class);
 
   public static void main(String... args) {
-    Integer step = 4;
+    Integer demo = 0; /* default is all of them */
     context.load("classpath:spring/app-context-xml.xml");
     context.refresh();
 
@@ -30,26 +30,26 @@ public class FindBookCategoryJdbcApp {
     logger.info("Usage: " + args[0] + " [1234]");
     logger.info("");
     logger.info("This is a demonstration of reading and writing to a database using Spring JDBC.");
-    logger.info("Specify a number to halt after each demo step in order to inspect the database.");
+    logger.info("Specify a number to only run one specific demo which allows database to be inspected.");
     logger.info("");
 
     if (args.length > 1) {
-      step = Integer.parseInt(args[1]);
+      demo = Integer.parseInt(args[1]);
     }
-    if (step < 0) {
-      logger.error("Expecting no argument or step number after " + args[0]);
+    if (demo < 0) {
+      logger.error("Expecting no argument or demo number after " + args[0]);
       return;
     }
 
     logger.info("============== Start of Find Books By Category =====================");
 
-    if (step > 0)
+    if (demo == 0 || demo == 1)
       demoPrinting();
-    if (step > 1)
+    if (demo == 0 || demo == 2)
       demoAddingBook();
-    if (step > 2)
+    if (demo == 0 || demo == 3)
       demoModifyingBook();
-    if (step > 3)
+    if (demo == 0 || demo == 4)
       demoDeletingBook();
 
     logger.info("============== End of Find Books By Category =====================");
@@ -59,7 +59,7 @@ public class FindBookCategoryJdbcApp {
 
 
   private static void demoDeletingBook() {
-    logger.info("------- Demo 1: Deleting a book -------------------------------");
+    logger.info("------- Demo 4: Deleting a book -------------------------------");
 
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
@@ -104,7 +104,7 @@ public class FindBookCategoryJdbcApp {
 
 
   private static void demoAddingBook() {
-    logger.info("------- Step 2: Adding a book ----------------------------------");
+    logger.info("------- Demo 2: Adding a book ----------------------------------");
 
     CategoryDao categoryDao = context.getBean(CategoryDao.class);
 
@@ -124,7 +124,7 @@ public class FindBookCategoryJdbcApp {
 
 
   private static void demoPrinting() {
-    logger.info("------- Step 1: Printing books and categories ------------------");
+    logger.info("------- Demo 1: Printing books and categories ------------------");
     logger.info("All Books:");
     printBooks(null);
 
