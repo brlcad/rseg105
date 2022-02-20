@@ -1,6 +1,10 @@
 package edu.morrison.spring.beans;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import edu.morrison.spring.beans.Book;
 
 
 @Entity
@@ -71,4 +75,5 @@ public class Author extends AbstractEntity {
 		result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
 		result = 31 * result + (description != null ? description.hashCode() : 0);
 		return result;
+  }
 }

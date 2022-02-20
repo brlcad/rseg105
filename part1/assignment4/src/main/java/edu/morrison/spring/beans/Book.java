@@ -1,6 +1,8 @@
 package edu.morrison.spring.beans;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 import edu.morrison.spring.beans.Category;
 import edu.morrison.spring.beans.Author;

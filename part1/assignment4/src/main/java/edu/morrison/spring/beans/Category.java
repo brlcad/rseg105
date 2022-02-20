@@ -22,7 +22,7 @@ import edu.morrison.spring.beans.Book;
   })
 public class Category extends AbstractEntity {
 
-  public statid final String FIND_BOOK_WITH_AUTHORS_CATEGORY_BY_ID = "Category.findBookWithAuthorsCategoryById";
+  public static final String FIND_BOOK_WITH_AUTHORS_CATEGORY_BY_ID = "Category.findBookWithAuthorsCategoryById";
 
   @Column
   private String name;
@@ -38,25 +38,11 @@ public class Category extends AbstractEntity {
     this.name = name;
   }
 
-  public Set<Book> getBooksSet() {
-    return booksSet;
+  public Set<Book> getBooks() {
+    return books;
   }
-  public void setBooksSet(Set<Book> booksSet) {
-    this.booksSet = booksSet;
-  }
-
-  public List<Book> getBooksList() {
-    return booksList;
-  }
-  public void setBooksList(List<Book> booksList) {
-    this.booksList = booksList;
-  }
-
-  public Map<String, Book> getBooksMap() {
-    return booksMap;
-  }
-  public void setBooksMap(Map<String, Book> booksMap) {
-    this.booksMap = booksMap;
+  public void setBooks(Set<Book> books) {
+    this.books = books;
   }
 
   @Override
