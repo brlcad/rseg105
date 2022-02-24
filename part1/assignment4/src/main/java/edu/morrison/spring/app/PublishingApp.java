@@ -59,6 +59,7 @@ public class PublishingApp {
 
   }
 
+
   private static void demoDeletingBook() {
     logger.info("------- Demo 4: Deleting a book -------------------------------");
 
@@ -66,8 +67,7 @@ public class PublishingApp {
 
 		BookDao bookDao = ctx.getBean(BookDao.class);
 
-    List<Book> booksBefore = bookDao.findAll();
-    booksBefore.forEach(i -> logger.info(i.toString()));
+    printBooks();
 
     String title = "Fundamentals of Computer Graphics";
     Book deleteme = bookDao.findBookByTitle(title);
@@ -82,8 +82,7 @@ public class PublishingApp {
 
       logger.info("All books AFTER delete:");
 
-      List<Book> booksAfter = bookDao.findAll();
-      booksAfter.forEach(i -> logger.info(i.toString()));
+      printBooks();
 
     } else {
       logger.info("Book [" + title + "] not found");
@@ -100,8 +99,7 @@ public class PublishingApp {
 
     logger.info("All books BEFORE add:");
 
-    List<Book> booksBefore = bookDao.findAll();
-    booksBefore.forEach(i -> logger.info(i.toString()));
+    printBooks();
 
     Book book = new Book();
     book.setIsbn("978-0367505035");
@@ -136,13 +134,12 @@ public class PublishingApp {
 
     logger.info("All books AFTER add:");
 
-    List<Book> booksAfter = bookDao.findAll();
-    booksAfter.forEach(i -> logger.info(i.toString()));
+    printBooks();
 
     logger.info("Book actually written:");
     Book bookById = bookDao.findBookWithAuthorAndCategoryById(saved.getId());
     printBook(bookById);
-}
+  }
 
 
   private static void demoLookupAllBooks() {
@@ -182,4 +179,10 @@ public class PublishingApp {
     }
   }
 
+  private static void printBooks() {
+		BookDao bookDao = ctx.getBean(BookDao.class);
+
+    List<Book> books = bookDao.findAll();
+    books.forEach(i -> logger.info(i.toString()));
+  }
 }
