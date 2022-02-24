@@ -6,5 +6,4 @@ import edu.morrison.spring.beans.Category;
 public interface CategoryDao {
   Category save(Category category);
 
-	Category findCategoryWithAuthorAndBooksById(Long id);
 }

@@ -1,28 +1,18 @@
 package edu.morrison.spring.beans;
 
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import edu.morrison.spring.beans.Book;
 
 
 @Entity
-@Table
-@NamedQueries({
-    @NamedQuery(name=Category.FIND_BOOK_WITH_AUTHORS_CATEGORY_BY_ID,
-                query="SELECT DISTINCT b FROM BOOK b " +
-                "LEFT JOIN FETCH b.AUTHORS a " +
-                "LEFT JOIN FETCH b.CATEGORY c " +
-                "WHERE b.id = :id"
-                )
-      /* !!! need more */
-  })
+@Table(name = "CATEGORY")
 public class Category extends AbstractEntity {
-
-  public static final String FIND_BOOK_WITH_AUTHORS_CATEGORY_BY_ID = "Category.findBookWithAuthorsCategoryById";
 
   @Column
   private String name;

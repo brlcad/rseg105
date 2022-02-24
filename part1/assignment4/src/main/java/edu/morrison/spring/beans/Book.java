@@ -9,8 +9,25 @@ import edu.morrison.spring.beans.Author;
 
 
 @Entity
-@Table
+@Table(name = "BOOK")
+@NamedQueries({
+		@NamedQuery(name=Book.FIND_ALL_BOOKS_BY_AUTHOR_ID,
+                query="select distinct b from Book b " +
+                "left join fetch b.authors a " +
+                "left join fetch b.category c " +
+                "where a.id = :id"
+                ),
+    @NamedQuery(name=Book.FIND_BOOK_WITH_AUTHOR_CATEGORY_BY_ID,
+                query="select distinct b from Book b " +
+                "left join fetch b.authors a " +
+                "left join fetch b.category c " +
+                "where b.id = :id"
+                )
+  })
 public class Book extends AbstractEntity {
+
+	public static final String FIND_ALL_BOOKS_BY_AUTHOR_ID = "Book.findAllBooksByAuthorId";
+  public static final String FIND_BOOK_WITH_AUTHOR_CATEGORY_BY_ID = "Book.findBookWithAuthorCategoryById";
 
   @ManyToOne
   @JoinColumn(name = "CATEGORY_ID")
@@ -30,6 +47,13 @@ public class Book extends AbstractEntity {
   }
   public void setCategory(Category category) {
     this.category = category;
+  }
+
+  public Set<Author> getAuthors() {
+    return this.authors;
+  }
+  public void setAuthors(Set<Author> authors) {
+    this.authors = authors;
   }
 
   public String getIsbn() {

@@ -1,5 +1,8 @@
 package edu.morrison.spring.app;
 
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -8,6 +11,7 @@ import org.springframework.context.support.GenericApplicationContext;
 import edu.morrison.spring.beans.Book;
 import edu.morrison.spring.beans.Category;
 import edu.morrison.spring.config.AppConfig;
+import edu.morrison.spring.dao.BookDao;
 import edu.morrison.spring.dao.CategoryDao;
 
 
@@ -39,9 +43,9 @@ public class PublishingApp {
     logger.info("============== Start of Publishing Demo =====================");
 
     if (demo == 0 || demo == 1)
-      demoPrinting();
+      demoLookupBook();
     if (demo == 0 || demo == 2)
-      demoAddingBook();
+      demoLookupAllBooks();
     if (demo == 0 || demo == 3)
       demoModifyingBook();
     if (demo == 0 || demo == 4)
@@ -55,12 +59,19 @@ public class PublishingApp {
     logger.info("------- Demo 4: Deleting a book -------------------------------");
 
     logger.info("Programming books BEFORE delete:");
-    printBooks("Programming");
 
-    /* TODO */
+		BookDao bookDao = ctx.getBean(BookDao.class);
 
-    logger.info("Programming books AFTER delete:");
-    printBooks("Programming");
+		Long idDelete = 8L;
+		Book bookDelete = bookDao.findBookWithAuthorAndCategoryById(idDelete);
+		bookDao.delete(bookDelete);
+    /*		FindAllWithAlbumAndInstrumentDemo.listBooksWithAuthorAndCategory(
+          bookDao.findAllWithAuthorAndCategory());
+    */
+
+		ctx.close();
+
+    //logger.info("Programming books AFTER delete:");
   }
 
 
@@ -68,12 +79,10 @@ public class PublishingApp {
     logger.info("------- Demo 3: Modifying a book -------------------------------");
 
     logger.info("Programming books BEFORE modify:");
-    printBooks("Programming");
 
     /* TODO */
 
     logger.info("Programming books AFTER modify:");
-    printBooks("Programming");
   }
 
 
@@ -81,7 +90,6 @@ public class PublishingApp {
     logger.info("------- Demo 2: Adding a book ----------------------------------");
 
     logger.info("Programming books BEFORE add:");
-    printBooks("Programming");
 
     Book book = new Book();
     book.setIsbn("978-0367505035");
@@ -91,32 +99,44 @@ public class PublishingApp {
     /* TODO */
 
     logger.info("Programming books AFTER add:");
-    printBooks("Programming");
   }
 
 
-  private static void demoPrinting() {
+  private static void demoLookupAllBooks() {
+    logger.info("------- Demo 2: Listing all books by author ID ------------------");
+
+		BookDao bookDao = ctx.getBean(BookDao.class);
+
+    Long id = 3L;
+    logger.info("Looking up author ID: " + id);
+    List<Book> books = bookDao.findAllBooksByAuthorId(id);
+    books.forEach(i -> printBook(i));
+    ctx.close();
+  }
+
+
+  private static void demoLookupBook() {
     logger.info("------- Demo 1: Printing books and categories ------------------");
-    logger.info("All Books:");
-    printBooks(null);
 
-    logger.info("Poetry Books:");
-    printBooks("Poetry");
+		BookDao bookDao = ctx.getBean(BookDao.class);
 
-    logger.info("All Categories:");
-    printCategories();
+    Long id = ThreadLocalRandom.current().nextLong(1L, 8L);
+    logger.info("Looking up book ID: " + id);
+    Book bookById = bookDao.findBookWithAuthorAndCategoryById(id);
+    printBook(bookById);
 
-		CategoryDao categoryDao = ctx.getBean(CategoryDao.class);
-    Category categoryById = categoryDao.findCategoryWithAuthorAndBooksById(1L);
-    logger.info("FOUND CATEGORY 1: " + categoryById.toString());
-    if (categoryById.getBooks() != null) {
-      categoryById.getBooks().forEach(book -> logger.info("\t" + book.toString()));
-    }
+    ctx.close();
   }
 
 
-  private static void printBooks(String category) {
-    /* TODO */
+  private static void printBook(Book book) {
+    logger.info(book.toString());
+    Category category = book.getCategory();
+    if (category != null)
+      logger.info(category.toString());
+    if (book.getAuthors() != null) {
+      book.getAuthors().forEach(i -> logger.info(i.toString()));
+    }
   }
 
 

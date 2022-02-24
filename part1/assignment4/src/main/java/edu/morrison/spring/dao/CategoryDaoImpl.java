@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import edu.morrison.spring.beans.Category;
 
 
+@SuppressWarnings("unchecked")
 @Transactional
 @Repository("categoryDao")
 public class CategoryDaoImpl implements CategoryDao {
@@ -24,20 +25,11 @@ public class CategoryDaoImpl implements CategoryDao {
 		return category;
 	}
 
-	@Transactional(readOnly = true)
-    public Category findCategoryWithAuthorAndBooksById(Long id) {
-		return (Category) sessionFactory.getCurrentSession().
-				getNamedQuery("Category.findBooksWithAuthorCategoryById").
-				setParameter("id", id).uniqueResult();
-	}
-
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
 	@Resource(name = "sessionFactory")
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
 	}
 }

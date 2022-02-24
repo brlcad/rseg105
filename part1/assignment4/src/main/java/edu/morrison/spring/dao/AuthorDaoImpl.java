@@ -25,12 +25,11 @@ public class AuthorDaoImpl implements AuthorDao {
 	}
 
 
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
 	@Resource(name = "sessionFactory")
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
 	}
 }
