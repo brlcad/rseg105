@@ -30,7 +30,7 @@ public class PublishingApp {
     logger.info("Book Publishing Hibernate Demo");
     logger.info("v0.0.1 by C.S. Morrison");
     logger.info("");
-    logger.info("Usage: " + args[0] + "");
+    logger.info("Usage: " + args[0] + "[12345]");
     logger.info("");
     logger.info("This is a demonstration of persisting entities via Spring Hibernate.");
     logger.info("Specify a number to only run one specific demo which allows database to be inspected.");
@@ -54,9 +54,28 @@ public class PublishingApp {
       demoAddingBook();
     if (demo == 0 || demo == 4)
       demoDeletingBook();
+    if (demo == 0 || demo == 5)
+      demoPrintingAuthors();
 
     logger.info("============== End of Publishing Demo =======================");
 
+  }
+
+
+  private static void demoPrintingAuthors() {
+    logger.info("------- Demo 5: Printing authors ------------------------------");
+
+    AuthorDao authorDao = ctx.getBean(AuthorDao.class);
+
+    List<Author> authors = authorDao.findAllAuthors();
+    if (authors != null) {
+      logger.info("All authors:");
+      authors.forEach(i -> logger.info(i.toString()));
+    } else {
+      logger.info("No authors found.");
+    }
+
+    ctx.close();
   }
 
 
@@ -184,5 +203,12 @@ public class PublishingApp {
 
     List<Book> books = bookDao.findAll();
     books.forEach(i -> logger.info(i.toString()));
+  }
+
+  private static void printAuthors() {
+		AuthorDao authorDao = ctx.getBean(AuthorDao.class);
+
+    List<Author> authors = authorDao.findAllAuthors();
+    authors.forEach(i -> logger.info(i.toString()));
   }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 import edu.morrison.spring.beans.Author;
 
@@ -29,6 +30,11 @@ public class AuthorDaoImpl implements AuthorDao {
 		logger.info("Author deleted with id: " + author.getId());
 	}
 
+	@Transactional(readOnly = true)
+  public List<Author> findAllAuthors() {
+    return (List<Author>) sessionFactory.getCurrentSession().
+      getNamedQuery("Author.findAllAuthors").list();
+  }
 
 	@Resource(name = "sessionFactory")
 	public void setSessionFactory(SessionFactory sessionFactory) {

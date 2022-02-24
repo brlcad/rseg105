@@ -8,8 +8,15 @@ import edu.morrison.spring.beans.Book;
 
 
 @Entity
-@Table
+@Table(name = "AUTHOR")
+@NamedQueries({
+		@NamedQuery(name=Author.FIND_ALL_AUTHORS,
+                query="select distinct a from Author a"
+                )
+      })
 public class Author extends AbstractEntity {
+
+  public static final String FIND_ALL_AUTHORS = "Author.findAllAuthors";
 
   @Column(name = "FIRST_NAME")
   private String firstName;
