@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 import edu.morrison.spring.beans.Category;
 
@@ -24,6 +25,13 @@ public class CategoryDaoImpl implements CategoryDao {
 		logger.info("Category saved with id: " + category.getId());
 		return category;
 	}
+
+	@Transactional(readOnly = true)
+  public Category findCategoryByName(String name) {
+    return (Category) sessionFactory.getCurrentSession().
+      getNamedQuery("Category.findCategoryByName").
+      setParameter("name", name).uniqueResult();
+  }
 
 	@Resource(name = "sessionFactory")
 	public void setSessionFactory(SessionFactory sessionFactory) {

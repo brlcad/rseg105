@@ -33,6 +33,11 @@ public class BookDaoImpl implements BookDao {
       setParameter("id", id).uniqueResult();
 	}
 
+  @Transactional(readOnly = true)
+  public List<Book> findAll() {
+    return sessionFactory.getCurrentSession().createQuery("from Book b").list();
+   }
+
 	public Book save(Book book) {
 		sessionFactory.getCurrentSession().saveOrUpdate(book);
 		logger.info("Book saved with id: " + book.getId());

@@ -13,5 +13,9 @@ public interface BookDao {
 
   Book findBookWithAuthorAndCategoryById(Long id);
 
+  //  Book findBookByName(String name);
+
+  List<Book> findAll();
+
   void delete(Book book);
 }

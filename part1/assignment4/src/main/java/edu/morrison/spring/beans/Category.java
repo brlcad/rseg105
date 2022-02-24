@@ -12,13 +12,20 @@ import edu.morrison.spring.beans.Book;
 
 @Entity
 @Table(name = "CATEGORY")
+@NamedQueries({
+		@NamedQuery(name=Category.FIND_CATEGORY_BY_NAME,
+                query="select distinct c from Category c " +
+                "where c.name = :name"
+                )
+      })
 public class Category extends AbstractEntity {
+
+  public static final String FIND_CATEGORY_BY_NAME = "Category.findCategoryByName";
 
   @Column
   private String name;
 
-  @OneToMany(mappedBy = "category", cascade=CascadeType.ALL,
-             orphanRemoval=true)
+  @OneToMany(mappedBy = "category", cascade=CascadeType.ALL, orphanRemoval=true)
   private Set<Book> books = new HashSet<>();
 
   public String getName() {
