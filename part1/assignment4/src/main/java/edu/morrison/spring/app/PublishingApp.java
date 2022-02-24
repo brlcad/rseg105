@@ -62,19 +62,34 @@ public class PublishingApp {
   private static void demoDeletingBook() {
     logger.info("------- Demo 4: Deleting a book -------------------------------");
 
-    logger.info("Programming books BEFORE delete:");
+    logger.info("All books BEFORE delete:");
 
 		BookDao bookDao = ctx.getBean(BookDao.class);
 
     List<Book> booksBefore = bookDao.findAll();
     booksBefore.forEach(i -> logger.info(i.toString()));
 
+    String title = "Fundamentals of Computer Graphics";
+    Book deleteme = bookDao.findBookByTitle(title);
+    if (deleteme != null) {
+      logger.info("Found our book to delete, id: " + deleteme.getId());
+      printBook(deleteme);
+
+      AuthorDao authorDao = ctx.getBean(AuthorDao.class);
+      if (deleteme.getAuthors() != null)
+        deleteme.getAuthors().forEach(i -> authorDao.delete(i));
+      bookDao.delete(deleteme);
+
+      logger.info("All books AFTER delete:");
+
+      List<Book> booksAfter = bookDao.findAll();
+      booksAfter.forEach(i -> logger.info(i.toString()));
+
+    } else {
+      logger.info("Book [" + title + "] not found");
+    }
+
 		ctx.close();
-
-    logger.info("Programming books AFTER delete:");
-
-    List<Book> booksAfter = bookDao.findAll();
-    booksAfter.forEach(i -> logger.info(i.toString()));
   }
 
 

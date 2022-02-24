@@ -33,6 +33,13 @@ public class BookDaoImpl implements BookDao {
       setParameter("id", id).uniqueResult();
 	}
 
+	@Transactional(readOnly = true)
+  public Book findBookByTitle(String title) {
+		return (Book) sessionFactory.getCurrentSession().
+      getNamedQuery("Book.findBookByTitle").
+      setParameter("title", title).uniqueResult();
+	}
+
   @Transactional(readOnly = true)
   public List<Book> findAll() {
     return sessionFactory.getCurrentSession().createQuery("from Book b").list();

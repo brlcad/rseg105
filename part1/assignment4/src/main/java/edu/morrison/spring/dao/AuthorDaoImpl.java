@@ -24,6 +24,11 @@ public class AuthorDaoImpl implements AuthorDao {
 		return author;
 	}
 
+	public void delete(Author author) {
+		sessionFactory.getCurrentSession().delete(author);
+		logger.info("Author deleted with id: " + author.getId());
+	}
+
 
 	@Resource(name = "sessionFactory")
 	public void setSessionFactory(SessionFactory sessionFactory) {

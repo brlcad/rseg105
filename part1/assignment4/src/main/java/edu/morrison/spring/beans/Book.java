@@ -22,12 +22,19 @@ import edu.morrison.spring.beans.Author;
                 "left join fetch b.authors a " +
                 "left join fetch b.category c " +
                 "where b.id = :id"
+                ),
+    @NamedQuery(name=Book.FIND_BOOK_BY_TITLE,
+                query="select distinct b from Book b " +
+                "left join fetch b.authors a " +
+                "left join fetch b.category c " +
+                "where b.title = :title"
                 )
   })
 public class Book extends AbstractEntity {
 
 	public static final String FIND_ALL_BOOKS_BY_AUTHOR_ID = "Book.findAllBooksByAuthorId";
   public static final String FIND_BOOK_WITH_AUTHOR_CATEGORY_BY_ID = "Book.findBookWithAuthorCategoryById";
+  public static final String FIND_BOOK_BY_TITLE = "Book.findBookByTitle";
 
   @ManyToOne
   @JoinColumn(name = "CATEGORY_ID")

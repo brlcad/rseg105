@@ -13,7 +13,7 @@ public interface BookDao {
 
   Book findBookWithAuthorAndCategoryById(Long id);
 
-  //  Book findBookByName(String name);
+  Book findBookByTitle(String name);
 
   List<Book> findAll();
 

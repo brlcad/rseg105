@@ -5,4 +5,6 @@ import edu.morrison.spring.beans.Author;
 
 public interface AuthorDao {
   Author save(Author author);
+
+  void delete(Author author);
 }
