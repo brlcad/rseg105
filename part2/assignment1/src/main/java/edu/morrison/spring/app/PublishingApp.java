@@ -1,3 +1,4 @@
+
 package edu.morrison.spring.app;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,7 +22,6 @@ import edu.morrison.spring.dao.CategoryDao;
 
 public class PublishingApp {
 
-  private static GenericApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
   private static Logger logger = LoggerFactory.getLogger(PublishingApp.class);
 
   public static void main(String... args) {
@@ -61,32 +61,31 @@ public class PublishingApp {
 
 
   private static void demoFindAllBooks() {
-    logger.info("------- Demo 4: Find all books for one author id who has more than one book in the database -------------------------------");
+    logger.info("------- Demo 4: Find all books for one author id who has more than one book in the database");
 
 
   }
 
 
   private static void demoDeleteBook() {
-    logger.info("------- Demo 3: Delete a saved book and author(s) from the database ----------------------------------");
+    logger.info("------- Demo 3: Delete a saved book and author(s) from the database");
 
 
   }
 
 
   private static void demoCreateBook() {
-    logger.info("------- Demo 2: Create a new book with a new author(s) ------------------");
+    logger.info("------- Demo 2: Create a new book with a new author(s)");
 
 
   }
 
 
   private static void demoLookupBook() {
-    logger.info("------- Demo 1: Find all books for one author id who has more than one book ------------------");
+    logger.info("------- Demo 1: Find all books for one author id who has more than one book");
 
 
   }
-
 
   private static void printBook(Book book) {
     logger.info(book.toString());
@@ -97,4 +96,4 @@ public class PublishingApp {
       book.getAuthors().forEach(i -> logger.info(i.toString()));
     }
   }
-
+}
