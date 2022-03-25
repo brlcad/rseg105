@@ -27,13 +27,13 @@ public class PublishingApp {
   public static void main(String... args) {
     Integer demo = 0; /* default is all of them */
 
-    logger.info("Book Publishing Hibernate Demo");
+    logger.info("Book Publishing JPA2 Demo");
     logger.info("v0.0.1 by C.S. Morrison");
     logger.info("");
-    logger.info("Usage: " + args[0] + "[12345]");
+    logger.info("Usage: " + args[0] + "[1234]");
     logger.info("");
-    logger.info("This is a demonstration of persisting entities via Spring Hibernate.");
-    logger.info("Specify a number to only run one specific demo which allows database to be inspected.");
+    logger.info("This is a demonstration of persisting entities via Spring JPA2.");
+    logger.info("Specify number to run each specific demo in succession (allowing database inspection).");
     logger.info("");
 
     if (args.length > 1) {
@@ -49,142 +49,42 @@ public class PublishingApp {
     if (demo == 0 || demo == 1)
       demoLookupBook();
     if (demo == 0 || demo == 2)
-      demoLookupAllBooks();
+      demoCreateBook();
     if (demo == 0 || demo == 3)
-      demoAddingBook();
+      demoDeleteBook();
     if (demo == 0 || demo == 4)
-      demoDeletingBook();
-    if (demo == 0 || demo == 5)
-      demoPrintingAuthors();
+      demoFindAllBooks();
 
     logger.info("============== End of Publishing Demo =======================");
 
   }
 
 
-  private static void demoPrintingAuthors() {
-    logger.info("------- Demo 5: Printing authors ------------------------------");
+  private static void demoFindAllBooks() {
+    logger.info("------- Demo 4: Find all books for one author id who has more than one book in the database -------------------------------");
 
-    AuthorDao authorDao = ctx.getBean(AuthorDao.class);
 
-    List<Author> authors = authorDao.findAllAuthors();
-    if (authors != null) {
-      logger.info("All authors:");
-      authors.forEach(i -> logger.info(i.toString()));
-    } else {
-      logger.info("No authors found.");
-    }
-
-    ctx.close();
   }
 
 
-  private static void demoDeletingBook() {
-    logger.info("------- Demo 4: Deleting a book -------------------------------");
+  private static void demoDeleteBook() {
+    logger.info("------- Demo 3: Delete a saved book and author(s) from the database ----------------------------------");
 
-    logger.info("All books BEFORE delete:");
 
-		BookDao bookDao = ctx.getBean(BookDao.class);
-
-    printBooks();
-
-    String title = "Fundamentals of Computer Graphics";
-    Book deleteme = bookDao.findBookByTitle(title);
-    if (deleteme != null) {
-      logger.info("Found our book to delete, id: " + deleteme.getId());
-      printBook(deleteme);
-
-      AuthorDao authorDao = ctx.getBean(AuthorDao.class);
-      if (deleteme.getAuthors() != null)
-        deleteme.getAuthors().forEach(i -> authorDao.delete(i));
-      bookDao.delete(deleteme);
-
-      logger.info("All books AFTER delete:");
-
-      printBooks();
-
-    } else {
-      logger.info("Book [" + title + "] not found");
-    }
-
-		ctx.close();
   }
 
 
-  private static void demoAddingBook() {
-    logger.info("------- Demo 3: Adding a book ----------------------------------");
-
-    BookDao bookDao = ctx.getBean(BookDao.class);
-
-    logger.info("All books BEFORE add:");
-
-    printBooks();
-
-    Book book = new Book();
-    book.setIsbn("978-0367505035");
-    book.setTitle("Fundamentals of Computer Graphics");
-    book.setPrice(126.0F);
-    String programming = "Programming";
-    CategoryDao categoryDao = ctx.getBean(CategoryDao.class);
-    logger.info("Looking up category by name: " + programming);
-    Category category = categoryDao.findCategoryByName(programming);
-    logger.info(category.toString());
-    book.setCategory(category);
-
-    AuthorDao authorDao = ctx.getBean(AuthorDao.class);
-
-    Set<Author> authors = new HashSet<Author>();
-    Author author1 = new Author();
-    author1.setFirstName("Steve");
-    author1.setLastName("Marschner");
-    author1.setDescription("Professor of Computer Science, Cornell University");
-    authorDao.save(author1);
-    Author author2 = new Author();
-    author2.setFirstName("Peter");
-    author2.setLastName("Shirley");
-    author2.setDescription("American computer scientist and computer graphics researcher.");
-    authorDao.save(author2);
-    authors.add(author1);
-    authors.add(author2);
-    book.setAuthors(authors);
-
-    logger.info("Adding book [" + book.getTitle() + "]");
-    Book saved = bookDao.save(book);
-
-    logger.info("All books AFTER add:");
-
-    printBooks();
-
-    logger.info("Book actually written:");
-    Book bookById = bookDao.findBookWithAuthorAndCategoryById(saved.getId());
-    printBook(bookById);
-  }
+  private static void demoCreateBook() {
+    logger.info("------- Demo 2: Create a new book with a new author(s) ------------------");
 
 
-  private static void demoLookupAllBooks() {
-    logger.info("------- Demo 2: Listing all books by author ID ------------------");
-
-		BookDao bookDao = ctx.getBean(BookDao.class);
-
-    Long id = 3L;
-    logger.info("Looking up author ID: " + id);
-    List<Book> books = bookDao.findAllBooksByAuthorId(id);
-    books.forEach(i -> printBook(i));
-    ctx.close();
   }
 
 
   private static void demoLookupBook() {
-    logger.info("------- Demo 1: Printing books and categories ------------------");
+    logger.info("------- Demo 1: Find all books for one author id who has more than one book ------------------");
 
-		BookDao bookDao = ctx.getBean(BookDao.class);
 
-    Long id = ThreadLocalRandom.current().nextLong(1L, 8L);
-    logger.info("Looking up book ID: " + id);
-    Book bookById = bookDao.findBookWithAuthorAndCategoryById(id);
-    printBook(bookById);
-
-    ctx.close();
   }
 
 
@@ -198,17 +98,3 @@ public class PublishingApp {
     }
   }
 
-  private static void printBooks() {
-		BookDao bookDao = ctx.getBean(BookDao.class);
-
-    List<Book> books = bookDao.findAll();
-    books.forEach(i -> logger.info(i.toString()));
-  }
-
-  private static void printAuthors() {
-		AuthorDao authorDao = ctx.getBean(AuthorDao.class);
-
-    List<Author> authors = authorDao.findAllAuthors();
-    authors.forEach(i -> logger.info(i.toString()));
-  }
-}
