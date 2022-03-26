@@ -13,10 +13,9 @@ public interface BookService {
 
   /*
   List<Book> findAll();
-
-  List<Book> findAllBooksByAuthorId(Long id);
   */
 
+  List<Book> findAllBooksByAuthorId(Long id);
   Book findBookWithAuthorAndCategoryById(Long id);
   Category findCategoryByName(String name);
   Author findAuthorByName(String firstName, String lastName);

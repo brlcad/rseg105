@@ -65,7 +65,14 @@ public class PublishingApp {
   private static void demoFindAllBooks() {
     logger.info("------- Demo 4: Find all books for one author id who has more than one book");
 
-
+    /* author #1 has multiple books */
+    logger.info("  listing books by author #1...");
+    Long id = 1L;
+    List<Book> books = bookService.findAllBooksByAuthorId(id);
+    for(Book b : books) {
+      printBook(b);
+    }
+    logger.info("  ... end listing of books by author #1");
   }
 
 

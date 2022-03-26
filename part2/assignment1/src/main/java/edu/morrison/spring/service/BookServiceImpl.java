@@ -35,15 +35,15 @@ public class BookServiceImpl implements BookService {
   public List<Book> findAll() {
     return sessionFactory.getCurrentSession().createQuery("from Book b").list();
   }
+  */
 
 	@Transactional(readOnly = true)
   @Override
 	public List<Book> findAllBooksByAuthorId(Long id) {
-		TypedQueryList<Book> books = em.createNamedQuery("Book.findAllBooksByAuthorId", Book.class).getResultList();
-
-      setParameter("id", id).list();
+		TypedQuery<Book> books = em.createNamedQuery("Book.findAllBooksByAuthorId", Book.class);
+    books.setParameter("id", id);
+    return books.getResultList();
 	}
-  */
 
 	@Transactional(readOnly = true)
   @Override
