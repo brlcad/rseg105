@@ -23,5 +23,7 @@ INSERT INTO AUTHOR (FIRST_NAME, LAST_NAME, DESCRIPTION) VALUES ("Humphreys", "Gr
 
 INSERT INTO AUTHOR_BOOK (AUTHOR_ID, BOOK_ID) VALUES (1, 1), (2, 2), (3, 5), (4, 6), (3, 7), (1, 8), (5, 9), (6, 9), (7, 9);
 
--- Test data added directly by the app
+-- Test data added by the app demo
 -- INSERT INTO BOOK (CATEGORY_ID, ISBN, TITLE, PRICE) VALUES (3, "978-0367505035", "Fundamentals of Computer Graphics", 126.0);
+-- INSERT INTO AUTHOR (FIRST_NAME, LAST_NAME, DESCRIPTION) VALUES ("Shirley", "Peter", "Peter Shirley is computer graphics researcher, NVIDIA computer scientist, and University of Utah adjunct professor.");
+-- INSERT INTO AUTHOR_BOOK (AUTHOR_ID, BOOK_ID) VALUES (8, 10);
