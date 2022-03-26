@@ -74,7 +74,20 @@ public class PublishingApp {
 
     Long id = 10L;
     Book bookById = bookService.findBookWithAuthorAndCategoryById(id);
-    bookService.delete(bookById);
+    if (bookById != null) {
+      logger.info("  found book #10...");
+      printBook(bookById);
+      bookService.delete(bookById);
+    } else {
+      return;
+    }
+
+    bookById = bookService.findBookWithAuthorAndCategoryById(id);
+    if (bookById == null) {
+      logger.info("  ...successfully deleted book #10");
+    } else {
+      logger.info("  ...unsuccessfully deleted book #10");
+    }
   }
 
 
@@ -101,6 +114,7 @@ public class PublishingApp {
 
     bookService.save(newbook);
 
+    logger.info("  ...successfully added book");
   }
 
 
