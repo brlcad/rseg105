@@ -12,9 +12,6 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import edu.morrison.spring.beans.Author;
 import edu.morrison.spring.beans.Book;
 import edu.morrison.spring.beans.Category;
-import edu.morrison.spring.dao.AuthorDao;
-import edu.morrison.spring.dao.BookDao;
-import edu.morrison.spring.dao.CategoryDao;
 
 
 public class PublishingApp {
