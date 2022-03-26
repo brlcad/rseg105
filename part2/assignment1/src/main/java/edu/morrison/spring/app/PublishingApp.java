@@ -85,8 +85,9 @@ public class PublishingApp {
     logger.info("------- Demo 1: Find a book by id");
 
     BookService bookService = ctx.getBean(BookService.class);
-    Book bookById = bookService.findBookWithAuthorAndCategoryById(1L);
-    logger.info(bookById.toString());
+    Long id = 9L;
+    Book bookById = bookService.findBookWithAuthorAndCategoryById(id);
+    printBook(bookById);
   }
 
   private static void printBook(Book book) {
