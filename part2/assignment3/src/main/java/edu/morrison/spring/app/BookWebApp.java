@@ -27,14 +27,6 @@ public class BookWebApp {
     //    logger.info("Specify number to run each specific demo in succession (allowing database inspection).");
     logger.info("");
 
-    if (args.length > 1) {
-      demo = Integer.parseInt(args[1]);
-    }
-    if (demo < 0) {
-      logger.error("Expecting no argument or demo number after " + args[0]);
-      return;
-    }
-
     logger.info("============== Start of Book WebApp Demo =====================");
 
 

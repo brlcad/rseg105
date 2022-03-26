@@ -8,36 +8,10 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import edu.morrison.spring.beans.Category;
-import edu.morrison.spring.beans.Author;
 
 
 @Entity
 @Table(name = "BOOK")
-@NamedQueries({
-		@NamedQuery(name=Book.FIND_ALL_BOOKS_BY_AUTHOR_ID,
-                query="select distinct b from Book b " +
-                "left join fetch b.authors a " +
-                "left join fetch b.category c " +
-                "where a.id = :id"
-                ),
-    @NamedQuery(name=Book.FIND_BOOK_WITH_AUTHOR_CATEGORY_BY_ID,
-                query="select distinct b from Book b " +
-                "left join fetch b.authors a " +
-                "left join fetch b.category c " +
-                "where b.id = :id"
-                ),
-    @NamedQuery(name=Book.FIND_BOOK_BY_TITLE,
-                query="select distinct b from Book b " +
-                "left join fetch b.authors a " +
-                "left join fetch b.category c " +
-                "where b.title = :title"
-                )
-  })
-@SqlResultSetMapping(
-     name="bookResult",
-     entities=@EntityResult(entityClass=Book.class)
-)
 public class Book implements Serializable {
 
   /*
