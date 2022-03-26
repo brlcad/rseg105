@@ -1,20 +1,17 @@
 
 package edu.morrison.spring.app;
 
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import edu.morrison.spring.beans.Author;
 import edu.morrison.spring.beans.Book;
 import edu.morrison.spring.beans.Category;
-import edu.morrison.spring.config.AppConfig;
 import edu.morrison.spring.dao.AuthorDao;
 import edu.morrison.spring.dao.BookDao;
 import edu.morrison.spring.dao.CategoryDao;
@@ -25,6 +22,11 @@ public class PublishingApp {
   private static Logger logger = LoggerFactory.getLogger(PublishingApp.class);
 
   public static void main(String... args) {
+
+    GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+    ctx.load("classpath:spring/app-context-annotation.xml");
+    ctx.refresh();
+
     Integer demo = 0; /* default is all of them */
 
     logger.info("Book Publishing JPA2 Demo");
