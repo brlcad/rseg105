@@ -40,4 +40,12 @@ public class BookServiceImpl implements BookService {
     return bookRepository.save(book);
   }
 
+  @Transactional
+  public void delete(Book book) {
+    for (Author author : book.getAuthors()) {
+      authorRepository.delete(author);
+    }
+    bookRepository.delete(book);
+  }
+
 }

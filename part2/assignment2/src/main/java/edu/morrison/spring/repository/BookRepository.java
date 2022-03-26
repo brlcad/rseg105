@@ -13,12 +13,6 @@ import edu.morrison.spring.beans.Category;
 public interface BookRepository extends CrudRepository<Book, Long> {
 
   List<Book> findByTitle(String title);
-  //  Author getAuthor();
   List<Book> findBookWithAuthorAndCategoryById(Long id);
-
-
-  /*
-  void delete(Book book);
-  */
 
 }

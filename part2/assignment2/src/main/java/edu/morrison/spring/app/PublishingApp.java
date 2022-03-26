@@ -52,10 +52,9 @@ public class PublishingApp {
       demoFindAllBooks(bookService);
     if (demo == 0 || demo == 3)
       demoCreateBook(bookService);
-    /*
     if (demo == 0 || demo == 4)
       demoDeleteBook(bookService);
-    */
+
     logger.info("============== End of Publishing Demo =======================");
 
   }
@@ -115,29 +114,55 @@ public class PublishingApp {
 
     bookService.save(newbook);
 
-    logger.info("  ...successfully added book");
+    logger.info("  ... looking up added book #10 ...");
+
+    Long id = 10L;
+    List<Book> bookById = bookService.findBookWithAuthorAndCategoryById(id);
+
+    if (bookById != null) {
+      logger.info("  book #10 FOUND:");
+      printBook(bookById.get(0));
+    } else {
+      logger.info("  book #10 NOT found:");
+    }
   }
 
-  /*
+
   private static void demoDeleteBook(BookService bookService) {
     logger.info("------- Demo 3: Delete a saved book and author(s) from the database");
 
+    List<Book> books;
+    logger.info("  ... books before delete:");
+    books = bookService.findAll();
+    for(Book b : books) {
+      logger.info(b.toString());
+    }
+
     Long id = 10L;
-    Book bookById = bookService.findBookWithAuthorAndCategoryById(id);
+    List<Book> bookById = bookService.findBookWithAuthorAndCategoryById(id);
     if (bookById != null) {
-      logger.info("  found book #10...");
-      printBook(bookById);
-      bookService.delete(bookById);
+      logger.info("  ... deleting book #10 ...");
+      bookService.delete(bookById.get(0));
     } else {
+      logger.info("  ... book #10 does not exist, nothing to delete.");
       return;
     }
 
-    bookById = bookService.findBookWithAuthorAndCategoryById(id);
-    if (bookById == null) {
-      logger.info("  ...successfully deleted book #10");
-    } else {
-      logger.info("  ...unsuccessfully deleted book #10");
+    logger.info("  ... books after delete:");
+    books = bookService.findAll();
+    for(Book b : books) {
+      logger.info(b.toString());
     }
+
+    logger.info("  ... confirming book #10 deleted ...");
+    bookById = bookService.findBookWithAuthorAndCategoryById(id);
+    if (bookById.size() == 0) {
+      logger.info("  ... successfully deleted book #10");
+    } else {
+      logger.info("  ... unsuccessfully deleted book #10");
+    }
+
+
   }
-  */
+
 }
