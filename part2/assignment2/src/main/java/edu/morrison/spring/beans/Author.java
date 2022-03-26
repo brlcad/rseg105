@@ -13,14 +13,23 @@ import edu.morrison.spring.beans.Book;
 		@NamedQuery(name=Author.FIND_ALL_AUTHORS,
                 query="select distinct a from Author a"
                 ),
+		@NamedQuery(name=Author.FIND_AUTHOR_BY_ID,
+                query="select distinct a from Author a " +
+                "where a.id = :id"
+                ),
 		@NamedQuery(name=Author.FIND_AUTHOR_BY_NAME,
                 query="select distinct a from Author a " +
                 "where a.firstName = :first_name and a.lastName = :last_name"
                 )
       })
+@SqlResultSetMapping(
+     name="authorResult",
+     entities=@EntityResult(entityClass=Author.class)
+)
 public class Author extends AbstractEntity {
 
   public static final String FIND_ALL_AUTHORS = "Author.findAllAuthors";
+  public static final String FIND_AUTHOR_BY_ID = "Author.findAuthorById";
   public static final String FIND_AUTHOR_BY_NAME = "Author.findAuthorByName";
 
   @Column(name = "FIRST_NAME")
