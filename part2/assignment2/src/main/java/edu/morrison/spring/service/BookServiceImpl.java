@@ -26,4 +26,9 @@ public class BookServiceImpl implements BookService {
     return Lists.newArrayList(bookRepository.findAll());
   }
 
+  @Transactional(readOnly=true)
+  public Book findBookWithAuthorAndCategoryById(Long id) {
+    return bookRepository.findBookWithAuthorAndCategoryById(id);
+  }
+
 }

@@ -12,8 +12,9 @@ public interface BookService  {
 
   List<Book> findAll();
 
-  /*
   Book findBookWithAuthorAndCategoryById(Long id);
+
+  /*
   Book save(Book book);
   void delete(Book book);
 
