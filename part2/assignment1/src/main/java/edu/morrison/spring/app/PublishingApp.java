@@ -19,11 +19,13 @@ public class PublishingApp {
 
   private static Logger logger = LoggerFactory.getLogger(PublishingApp.class);
   private static GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+  private static BookService bookService;
 
   public static void main(String... args) {
 
     ctx.load("classpath:spring/app-context-annotation.xml");
     ctx.refresh();
+    bookService = ctx.getBean(BookService.class);
 
     Integer demo = 0; /* default is all of them */
 
@@ -70,14 +72,14 @@ public class PublishingApp {
   private static void demoDeleteBook() {
     logger.info("------- Demo 3: Delete a saved book and author(s) from the database");
 
-
+    Long id = 10L;
+    Book bookById = bookService.findBookWithAuthorAndCategoryById(id);
+    bookService.delete(bookById);
   }
 
 
   private static void demoCreateBook() {
     logger.info("------- Demo 2: Create a new book with a new author(s)");
-
-    BookService bookService = ctx.getBean(BookService.class);
 
     Book newbook = new Book();
     newbook.setIsbn("978-0367505035");
@@ -105,7 +107,6 @@ public class PublishingApp {
   private static void demoLookupBook() {
     logger.info("------- Demo 1: Find a book by id");
 
-    BookService bookService = ctx.getBean(BookService.class);
     Long id = 9L;
     Book bookById = bookService.findBookWithAuthorAndCategoryById(id);
     printBook(bookById);
