@@ -12,15 +12,16 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import edu.morrison.spring.beans.Author;
 import edu.morrison.spring.beans.Book;
 import edu.morrison.spring.beans.Category;
+import edu.morrison.spring.service.BookService;
 
 
 public class PublishingApp {
 
   private static Logger logger = LoggerFactory.getLogger(PublishingApp.class);
+  private static GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
 
   public static void main(String... args) {
 
-    GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
     ctx.load("classpath:spring/app-context-annotation.xml");
     ctx.refresh();
 
@@ -60,7 +61,7 @@ public class PublishingApp {
 
 
   private static void demoFindAllBooks() {
-    logger.info("------- Demo 4: Find all books for one author id who has more than one book in the database");
+    logger.info("------- Demo 4: Find all books for one author id who has more than one book");
 
 
   }
@@ -81,9 +82,11 @@ public class PublishingApp {
 
 
   private static void demoLookupBook() {
-    logger.info("------- Demo 1: Find all books for one author id who has more than one book");
+    logger.info("------- Demo 1: Find a book by id");
 
-
+    BookService bookService = ctx.getBean(BookService.class);
+    Book bookById = bookService.findBookWithAuthorAndCategoryById(1L);
+    logger.info(bookById.toString());
   }
 
   private static void printBook(Book book) {
