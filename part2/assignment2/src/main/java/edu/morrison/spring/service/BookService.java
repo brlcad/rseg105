@@ -1,11 +1,12 @@
-import org.springframework.data.repository.CrudRepository;
+package edu.morrison.spring.service;
 
 import java.util.List;
 
-import edu.morrison.spring.beans.Author;
 import edu.morrison.spring.beans.Book;
+/*
+import edu.morrison.spring.beans.Author;
 import edu.morrison.spring.beans.Category;
-
+*/
 
 public interface BookService  {
 
