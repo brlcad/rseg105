@@ -1,4 +1,4 @@
-package edu.morrison.spring.service;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
@@ -7,18 +7,17 @@ import edu.morrison.spring.beans.Book;
 import edu.morrison.spring.beans.Category;
 
 
-public interface BookService {
+public interface BookRepository extends CrudRepository<Book, Long> {
 
-  Book save(Book book);
+  List<Book> findByTitle(String title);
 
   /*
-  List<Book> findAll();
-  */
-
-  List<Book> findAllBooksByAuthorId(Long id);
   Book findBookWithAuthorAndCategoryById(Long id);
+  Book save(Book book);
+  void delete(Book book);
+
   Category findCategoryByName(String name);
   Author findAuthorByName(String firstName, String lastName);
+  */
 
-  void delete(Book book);
 }
