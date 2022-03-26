@@ -77,6 +77,24 @@ public class PublishingApp {
   private static void demoCreateBook() {
     logger.info("------- Demo 2: Create a new book with a new author(s)");
 
+    BookService bookService = ctx.getBean(BookService.class);
+
+    Book newbook = new Book();
+    //    newbook.setCategory(3);
+    newbook.setIsbn("978-0367505035");
+    newbook.setTitle("Fundamentals of Computer Graphics");
+    newbook.setPrice(126.0F);
+
+    Author newauthor = new Author();
+    newauthor.setFirstName("Peter");
+    newauthor.setLastName("Shirley");
+    newauthor.setDescription("Peter Shirley is computer graphics researcher, NVIDIA computer scientist, and University of Utah adjunct professor.");
+
+    Set<Author> authors = new HashSet<>();
+    authors.add(newauthor);
+    newbook.setAuthors(authors);
+
+    bookService.save(newbook);
 
   }
 
