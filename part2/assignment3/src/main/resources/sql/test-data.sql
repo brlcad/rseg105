@@ -1,0 +1,10 @@
+INSERT INTO BOOK (CATEGORY_NAME, ISBN, TITLE, PUBLISHER, PRICE) VALUES ("Novel", "978-0075536321", "Anna Karenina", "McGraw-Hill", 17.57);
+INSERT INTO BOOK (CATEGORY_NAME, ISBN, TITLE, PUBLISHER, PRICE) VALUES ("Novel", "978-0060194994", "To Kill A Mockingbird", "Harper Collins", 25.95);
+INSERT INTO BOOK (CATEGORY_NAME, ISBN, TITLE, PUBLISHER, PRICE) VALUES ("Programming", "978-0134685991", "Effective Java", "Addison-Wesley Professional", 43.86);
+INSERT INTO BOOK (CATEGORY_NAME, ISBN, TITLE, PUBLISHER, PRICE) VALUES ("Poetry", "978-0571096343", "The Waste Land by T.S. Eliot", "Faber And Faber", 99.99);
+INSERT INTO BOOK (CATEGORY_NAME, ISBN, TITLE, PUBLISHER, PRICE) VALUES ("Novel", "978-1400079988", "War and Peace", "Vintage", 21.00);
+INSERT INTO BOOK (CATEGORY_NAME, ISBN, TITLE, PUBLISHER, PRICE) VALUES ("Programming", "978-0128006450", "Physically Based Rendering", "Morgan Kaufmann", 109.95);
+
+-- Test data added by the app demo
+-- INSERT INTO BOOK (CATEGORY_NAME, ISBN, TITLE, PUBLISHER, PRICE) VALUES (3, "978-0367505035", "Fundamentals of Computer Graphics", "AK Peters/CRC Press", 126.0);
+
