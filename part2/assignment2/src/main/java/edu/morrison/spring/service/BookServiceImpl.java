@@ -8,10 +8,8 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import edu.morrison.spring.beans.Book;
-/*
 import edu.morrison.spring.beans.Author;
 import edu.morrison.spring.beans.Category;
-*/
 
 
 @Service("springJpaBookService")
@@ -21,13 +19,19 @@ public class BookServiceImpl implements BookService {
   @Autowired
 	private BookRepository bookRepository;
 
-  @Transactional(readOnly = true)
+  @Transactional(readOnly=true)
   public List<Book> findAll() {
     return Lists.newArrayList(bookRepository.findAll());
   }
 
+  /*  @Transactional(readOnly=true)
+  public List<Author> findAuthor(Long id) {
+    return Lists.newArrayList(bookRepository.getAuthor());
+  }
+  */
+
   @Transactional(readOnly=true)
-  public Book findBookWithAuthorAndCategoryById(Long id) {
+  public List<Book> findBookWithAuthorAndCategoryById(Long id) {
     return bookRepository.findBookWithAuthorAndCategoryById(id);
   }
 

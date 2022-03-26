@@ -25,7 +25,7 @@ public class Category extends AbstractEntity {
   @Column(unique = true)
   private String name;
 
-  @OneToMany(mappedBy = "category", orphanRemoval=true)
+  @OneToMany(mappedBy = "category", cascade=CascadeType.ALL, orphanRemoval=true)
   private Set<Book> books = new HashSet<>();
 
   public String getName() {

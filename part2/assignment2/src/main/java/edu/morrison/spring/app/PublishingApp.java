@@ -8,10 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import edu.morrison.spring.beans.Book;
-import edu.morrison.spring.beans.Category;
-/*
 import edu.morrison.spring.beans.Author;
-*/
+import edu.morrison.spring.beans.Category;
+
 
 public class PublishingApp {
 
@@ -45,9 +44,8 @@ public class PublishingApp {
 
     logger.info("============== Start of Publishing Demo =====================");
 
-    /*    if (demo == 0 || demo == 1)
-      demoLookupBook();
-    */
+    if (demo == 0 || demo == 1)
+      demoLookupBook(bookService);
     if (demo == 0 || demo == 2)
       demoFindAllBooks(bookService);
     /*
@@ -72,15 +70,14 @@ public class PublishingApp {
   }
 
 
-  /*
-  private static void demoLookupBook() {
+  private static void demoLookupBook(BookService bookService) {
     logger.info("------- Demo 1: Find a book by id");
 
-    Long id = 9L;
-    Book bookById = bookService.findBookWithAuthorAndCategoryById(id);
-    printBook(bookById);
+    Long id = 2L;
+    List<Book> bookById = bookService.findBookWithAuthorAndCategoryById(id);
+    printBook(bookById.get(0));
   }
-  */
+
 
   private static void demoFindAllBooks(BookService bookService) {
     logger.info("------- Demo 2: Find all books without details");
