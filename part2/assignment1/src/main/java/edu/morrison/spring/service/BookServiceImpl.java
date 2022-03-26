@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.NoResultException;
 
 import edu.morrison.spring.beans.Author;
 import edu.morrison.spring.beans.Book;
@@ -69,7 +70,11 @@ public class BookServiceImpl implements BookService {
                                                      Author.class);
     query.setParameter("first_name", firstName);
     query.setParameter("last_name", lastName);
-    return query.getSingleResult();
+    try {
+      return query.getSingleResult();
+    } catch (NoResultException ignore) {
+      return null;
+    }
   }
 
 
@@ -82,6 +87,11 @@ public class BookServiceImpl implements BookService {
 
     for (Author author : book.getAuthors()) {
       Author dbauth = findAuthorByName(author.getFirstName(), author.getLastName());
+      if (dbauth == null) {
+        em.persist(author);
+        dbauth = findAuthorByName(author.getFirstName(), author.getLastName());
+      }
+
       author.setId(dbauth.getId());
       if (author.getId() == null) {
         em.persist(author);
