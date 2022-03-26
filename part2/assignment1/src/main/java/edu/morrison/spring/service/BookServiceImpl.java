@@ -51,7 +51,11 @@ public class BookServiceImpl implements BookService {
 		TypedQuery<Book> query = em.createNamedQuery("Book.findBookWithAuthorCategoryById",
                                                  Book.class);
     query.setParameter("id", id);
-    return query.getSingleResult();
+    try {
+      return query.getSingleResult();
+    } catch (NoResultException ignore) {
+      return null;
+    }
 	}
 
 	@Transactional(readOnly = true)
@@ -60,7 +64,11 @@ public class BookServiceImpl implements BookService {
 		TypedQuery<Category> query = em.createNamedQuery("Category.findCategoryByName",
                                                      Category.class);
     query.setParameter("name", name);
-    return query.getSingleResult();
+    try {
+      return query.getSingleResult();
+    } catch (NoResultException ignore) {
+      return null;
+    }
 	}
 
 	@Transactional(readOnly = true)
@@ -111,10 +119,15 @@ public class BookServiceImpl implements BookService {
     return book;
 	}
 
+
   @Override
 	public void delete(Book book) {
     Book mergedBook = em.merge(book);
+    for (Author author : mergedBook.getAuthors()) {
+      em.remove(author);
+    }
     em.remove(mergedBook);
+    em.flush();
 
 		logger.info("Book deleted with id: " + book.getId());
 	}
