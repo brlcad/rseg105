@@ -12,7 +12,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import edu.morrison.spring.beans.Author;
 import edu.morrison.spring.beans.Book;
+import edu.morrison.spring.beans.Category;
 
 
 @Service("jpaBookService")
@@ -51,15 +53,39 @@ public class BookServiceImpl implements BookService {
     return query.getSingleResult();
 	}
 
+	@Transactional(readOnly = true)
+  @Override
+  public Category findCategoryByName(String name) {
+		TypedQuery<Category> query = em.createNamedQuery("Category.findCategoryByName",
+                                                     Category.class);
+    query.setParameter("name", name);
+    return query.getSingleResult();
+	}
+
   @Override
 	public Book save(Book book) {
+		logger.info("Saving book with id: " + book.getId());
+
+    Category cat = findCategoryByName(book.getCategory().getName());
+    book.setCategory(cat);
+
+    for (Author author : book.getAuthors()) {
+      if (author.getId() == null) {
+        em.persist(author);
+      } else {
+        em.merge(author);
+      }
+    }
+
     if (book.getId() == null) {
       em.persist(book);
     } else {
       em.merge(book);
     }
+
 		logger.info("Book saved with id: " + book.getId());
-		return book;
+
+    return book;
 	}
 
   @Override
