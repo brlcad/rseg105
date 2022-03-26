@@ -6,4 +6,4 @@ mysql -uspring -pspring morebooks < src/main/resources/sql/test-data.sql
 
 mvn clean install
 echo "=== Running PublishingApp ==========="
-java -jar ./target/part2-assignment2.jar edu.morrison.spring.app.PublishingApp $*
+java -jar ./target/part2-assignment2.jar edu.morrison.spring.PublishingApp $*
