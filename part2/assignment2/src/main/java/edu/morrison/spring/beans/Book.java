@@ -2,8 +2,11 @@
 package edu.morrison.spring.beans;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import edu.morrison.spring.beans.Category;
 import edu.morrison.spring.beans.Author;
@@ -35,11 +38,24 @@ import edu.morrison.spring.beans.Author;
      name="bookResult",
      entities=@EntityResult(entityClass=Book.class)
 )
-public class Book extends AbstractEntity {
+public class Book implements Serializable {
 
 	public static final String FIND_ALL_BOOKS_BY_AUTHOR_ID = "Book.findAllBooksByAuthorId";
   public static final String FIND_BOOK_WITH_AUTHOR_CATEGORY_BY_ID = "Book.findBookWithAuthorCategoryById";
   public static final String FIND_BOOK_BY_TITLE = "Book.findBookByTitle";
+
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID")
+	protected Long id;
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
   @ManyToOne
   @JoinColumn(name = "CATEGORY_ID")

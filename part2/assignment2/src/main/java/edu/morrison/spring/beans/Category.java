@@ -18,9 +18,21 @@ import edu.morrison.spring.beans.Book;
                 "where c.name = :name"
                 )
       })
-public class Category extends AbstractEntity {
+public class Category implements Serializable {
 
   public static final String FIND_CATEGORY_BY_NAME = "Category.findCategoryByName";
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID")
+	protected Long id;
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
   @Column(unique = true)
   private String name;
