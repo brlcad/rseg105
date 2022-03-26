@@ -88,7 +88,7 @@ public class PublishingApp {
     /* author #1 has multiple books */
     List<Book> books = bookService.findAll();
     for(Book b : books) {
-      printBook(b);
+      logger.info(b.toString());
     }
   }
 
