@@ -1,7 +1,0 @@
-edu/morrison/spring/service/BookService.class
-edu/morrison/spring/app/PublishingApp.class
-edu/morrison/spring/beans/Author.class
-edu/morrison/spring/beans/AbstractEntity.class
-edu/morrison/spring/beans/Book.class
-edu/morrison/spring/beans/Category.class
-edu/morrison/spring/service/BookServiceImpl.class
