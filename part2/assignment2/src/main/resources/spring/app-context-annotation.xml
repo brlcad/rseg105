@@ -37,7 +37,7 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>
-        <property name="packagesToScan" value="edu.morrison.spring"/>
+        <property name="packagesToScan" value="edu.morrison.spring.beans"/>
         <property name="jpaProperties">
             <props>
                  <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
