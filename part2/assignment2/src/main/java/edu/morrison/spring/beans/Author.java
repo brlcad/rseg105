@@ -56,6 +56,13 @@ public class Author implements Serializable {
   @Column
   private String description;
 
+  @ManyToMany(fetch= FetchType.EAGER)
+  @JoinTable(name = "AUTHOR_BOOK",
+             joinColumns = @JoinColumn(name = "AUTHOR_ID"),
+             inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
+  protected Set<Book> books = new HashSet<>();
+
+
   public String getFirstName() {
     return firstName;
   }
@@ -76,12 +83,6 @@ public class Author implements Serializable {
   public void setDescription(String description) {
     this.description = description;
   }
-
-  @ManyToMany
-  @JoinTable(name = "AUTHOR_BOOK",
-             joinColumns = @JoinColumn(name = "AUTHOR_ID"),
-             inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
-  private Set<Book> books = new HashSet<>();
 
 
   @Override

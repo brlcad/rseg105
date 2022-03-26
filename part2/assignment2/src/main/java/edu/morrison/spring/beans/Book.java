@@ -70,6 +70,13 @@ public class Book implements Serializable {
   @Column
   private Float price;
 
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "AUTHOR_BOOK",
+             joinColumns = @JoinColumn(name = "BOOK_ID"),
+             inverseJoinColumns = @JoinColumn(name = "AUTHOR_ID"))
+  private Set<Author> authors = new HashSet<>();
+
+
   public Category getCategory() {
     return this.category;
   }
@@ -108,12 +115,6 @@ public class Book implements Serializable {
   public void setPrice(Float price) {
     this.price = price;
   }
-
-  @ManyToMany
-  @JoinTable(name = "AUTHOR_BOOK",
-             joinColumns = @JoinColumn(name = "BOOK_ID"),
-             inverseJoinColumns = @JoinColumn(name = "AUTHOR_ID"))
-  private Set<Author> authors = new HashSet<>();
 
 
   @Override
