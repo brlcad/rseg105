@@ -73,7 +73,7 @@ public class PublishingApp {
   private static void demoLookupBook(BookService bookService) {
     logger.info("------- Demo 1: Find a book by id");
 
-    Long id = 2L;
+    Long id = 9L;
     List<Book> bookById = bookService.findBookWithAuthorAndCategoryById(id);
     printBook(bookById.get(0));
   }
