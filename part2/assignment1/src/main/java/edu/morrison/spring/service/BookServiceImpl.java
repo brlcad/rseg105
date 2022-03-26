@@ -62,6 +62,17 @@ public class BookServiceImpl implements BookService {
     return query.getSingleResult();
 	}
 
+	@Transactional(readOnly = true)
+  @Override
+  public Author findAuthorByName(String firstName, String lastName) {
+		TypedQuery<Author> query = em.createNamedQuery("Author.findAuthorByName",
+                                                     Author.class);
+    query.setParameter("first_name", firstName);
+    query.setParameter("last_name", lastName);
+    return query.getSingleResult();
+  }
+
+
   @Override
 	public Book save(Book book) {
 		logger.info("Saving book with id: " + book.getId());
@@ -70,6 +81,8 @@ public class BookServiceImpl implements BookService {
     book.setCategory(cat);
 
     for (Author author : book.getAuthors()) {
+      Author dbauth = findAuthorByName(author.getFirstName(), author.getLastName());
+      author.setId(dbauth.getId());
       if (author.getId() == null) {
         em.persist(author);
       } else {

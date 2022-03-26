@@ -19,6 +19,7 @@ public interface BookService {
 
   Book findBookWithAuthorAndCategoryById(Long id);
   Category findCategoryByName(String name);
+  Author findAuthorByName(String firstName, String lastName);
 
   void delete(Book book);
 }
