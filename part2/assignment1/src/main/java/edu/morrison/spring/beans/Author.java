@@ -12,11 +12,16 @@ import edu.morrison.spring.beans.Book;
 @NamedQueries({
 		@NamedQuery(name=Author.FIND_ALL_AUTHORS,
                 query="select distinct a from Author a"
+                ),
+		@NamedQuery(name=Author.FIND_AUTHOR_BY_NAME,
+                query="select distinct a from Author a " +
+                "where a.firstName = :first_name and a.lastName = :last_name"
                 )
       })
 public class Author extends AbstractEntity {
 
   public static final String FIND_ALL_AUTHORS = "Author.findAllAuthors";
+  public static final String FIND_AUTHOR_BY_NAME = "Author.findAuthorByName";
 
   @Column(name = "FIRST_NAME")
   private String firstName;
@@ -34,7 +39,7 @@ public class Author extends AbstractEntity {
     this.firstName = firstName;
   }
 
-  public String getLasttName() {
+  public String getLastName() {
     return lastName;
   }
   public void setLastName(String lastName) {
