@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>edu.morrison.spring</groupId>
-  <artifactId>part1.assignment2.1</artifactId>
+  <artifactId>part2.assignment1</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>part2-assignment1</name>
