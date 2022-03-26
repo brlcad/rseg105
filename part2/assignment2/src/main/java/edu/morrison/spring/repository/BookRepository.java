@@ -16,12 +16,9 @@ public interface BookRepository extends CrudRepository<Book, Long> {
   //  Author getAuthor();
   List<Book> findBookWithAuthorAndCategoryById(Long id);
 
-  /*
-  Book save(Book book);
-  void delete(Book book);
 
-  Category findCategoryByName(String name);
-  Author findAuthorByName(String firstName, String lastName);
+  /*
+  void delete(Book book);
   */
 
 }

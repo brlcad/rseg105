@@ -2,6 +2,8 @@
 package edu.morrison.spring;
 
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,11 +50,11 @@ public class PublishingApp {
       demoLookupBook(bookService);
     if (demo == 0 || demo == 2)
       demoFindAllBooks(bookService);
-    /*
     if (demo == 0 || demo == 3)
-      demoCreateBook();
+      demoCreateBook(bookService);
+    /*
     if (demo == 0 || demo == 4)
-      demoDeleteBook();
+      demoDeleteBook(bookService);
     */
     logger.info("============== End of Publishing Demo =======================");
 
@@ -73,6 +75,7 @@ public class PublishingApp {
   private static void demoLookupBook(BookService bookService) {
     logger.info("------- Demo 1: Find a book by id");
 
+    /* book #9 has multiple authors */
     Long id = 9L;
     List<Book> bookById = bookService.findBookWithAuthorAndCategoryById(id);
     printBook(bookById.get(0));
@@ -82,15 +85,13 @@ public class PublishingApp {
   private static void demoFindAllBooks(BookService bookService) {
     logger.info("------- Demo 2: Find all books without details");
 
-    /* author #1 has multiple books */
     List<Book> books = bookService.findAll();
     for(Book b : books) {
       logger.info(b.toString());
     }
   }
 
-  /*
-  private static void demoCreateBook() {
+  private static void demoCreateBook(BookService bookService) {
     logger.info("------- Demo 2: Create a new book with a new author(s)");
 
     Book newbook = new Book();
@@ -100,8 +101,10 @@ public class PublishingApp {
 
     Category newcat = new Category();
     newcat.setName("Programming");
+    newcat.setId(3L);
     newbook.setCategory(newcat);
 
+    /*
     Author newauthor = new Author();
     newauthor.setFirstName("Peter");
     newauthor.setLastName("Shirley");
@@ -110,14 +113,14 @@ public class PublishingApp {
     Set<Author> authors = new HashSet<>();
     authors.add(newauthor);
     newbook.setAuthors(authors);
-
+    */
     bookService.save(newbook);
 
     logger.info("  ...successfully added book");
   }
 
-
-  private static void demoDeleteBook() {
+  /*
+  private static void demoDeleteBook(BookService bookService) {
     logger.info("------- Demo 3: Delete a saved book and author(s) from the database");
 
     Long id = 10L;
