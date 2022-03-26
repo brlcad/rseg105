@@ -1,3 +1,4 @@
+
 package edu.morrison.spring.beans;
 
 import javax.persistence.*;
@@ -30,6 +31,10 @@ import edu.morrison.spring.beans.Author;
                 "where b.title = :title"
                 )
   })
+@SqlResultSetMapping(
+     name="bookResult",
+     entities=@EntityResult(entityClass=Book.class)
+)
 public class Book extends AbstractEntity {
 
 	public static final String FIND_ALL_BOOKS_BY_AUTHOR_ID = "Book.findAllBooksByAuthorId";
@@ -50,7 +55,7 @@ public class Book extends AbstractEntity {
   private Float price;
 
   public Category getCategory() {
-    return category;
+    return this.category;
   }
   public void setCategory(Category category) {
     this.category = category;
@@ -61,6 +66,10 @@ public class Book extends AbstractEntity {
   }
   public void setAuthors(Set<Author> authors) {
     this.authors = authors;
+  }
+
+  public boolean setAuthor(Author author) {
+    return getAuthors().add(author);
   }
 
   public String getIsbn() {
