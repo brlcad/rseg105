@@ -104,7 +104,6 @@ public class PublishingApp {
     newcat.setId(3L);
     newbook.setCategory(newcat);
 
-    /*
     Author newauthor = new Author();
     newauthor.setFirstName("Peter");
     newauthor.setLastName("Shirley");
@@ -113,7 +112,7 @@ public class PublishingApp {
     Set<Author> authors = new HashSet<>();
     authors.add(newauthor);
     newbook.setAuthors(authors);
-    */
+
     bookService.save(newbook);
 
     logger.info("  ...successfully added book");

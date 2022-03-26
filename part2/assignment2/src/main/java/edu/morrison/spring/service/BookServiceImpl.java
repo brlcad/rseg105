@@ -19,6 +19,9 @@ public class BookServiceImpl implements BookService {
   @Autowired
 	private BookRepository bookRepository;
 
+  @Autowired
+  AuthorRepository authorRepository;
+
   @Transactional(readOnly=true)
   public List<Book> findAll() {
     return Lists.newArrayList(bookRepository.findAll());
@@ -31,7 +34,9 @@ public class BookServiceImpl implements BookService {
 
   @Transactional
   public Book save(Book book) {
-
+    for (Author author : book.getAuthors()) {
+      authorRepository.save(author);
+    }
     return bookRepository.save(book);
   }
 
