@@ -1,5 +1,6 @@
 package edu.morrison.spring.beans;
 
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -7,7 +8,7 @@ import java.io.Serializable;
 public abstract class AbstractEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(updatable = false)
 	protected Long id;
 
