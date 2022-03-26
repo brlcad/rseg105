@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>edu.morrison.spring</groupId>
-  <artifactId>part1.assignment2.1</artifactId>
+  <artifactId>part2.assignment2</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>part2-assignment1</name>
+  <name>part2-assignment2</name>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -91,7 +91,7 @@
 		<executions>
 			<execution>
 				<phase>package</phase>
-				<id>part2-assignment1</id>
+				<id>part2-assignment2</id>
 				<goals>
 					<goal>shade</goal>
 				</goals>
@@ -108,7 +108,7 @@
 							<mainClass>edu.morrison.spring.app.PublishingApp</mainClass>
 						</transformer>
 					</transformers>
-					<finalName>part2-assignment1</finalName>
+					<finalName>part2-assignment2</finalName>
 				</configuration>
 			  </execution>
 			</executions>

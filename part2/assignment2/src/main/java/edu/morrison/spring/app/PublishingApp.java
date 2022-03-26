@@ -29,7 +29,7 @@ public class PublishingApp {
 
     Integer demo = 0; /* default is all of them */
 
-    logger.info("Book Publishing JPA2 Demo");
+    logger.info("Book Publishing Spring Data JPA2 Demo");
     logger.info("v0.0.1 by C.S. Morrison");
     logger.info("");
     logger.info("Usage: " + args[0] + "[1234]");
