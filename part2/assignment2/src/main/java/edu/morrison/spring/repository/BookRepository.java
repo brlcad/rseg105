@@ -1,4 +1,4 @@
-package edu.morrison.spring.repository;
+package edu.morrison.spring;
 
 import org.springframework.data.repository.CrudRepository;
 

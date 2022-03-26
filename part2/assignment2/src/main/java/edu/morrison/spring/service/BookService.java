@@ -1,4 +1,4 @@
-package edu.morrison.spring.service;
+package edu.morrison.spring;
 
 import java.util.List;
 

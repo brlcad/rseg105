@@ -1,5 +1,5 @@
 
-package edu.morrison.spring.app;
+package edu.morrison.spring;
 
 import java.util.List;
 
@@ -8,22 +8,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import edu.morrison.spring.beans.Book;
+import edu.morrison.spring.beans.Category;
 /*
 import edu.morrison.spring.beans.Author;
-import edu.morrison.spring.beans.Category;
 */
 
 public class PublishingApp {
 
   private static Logger logger = LoggerFactory.getLogger(PublishingApp.class);
   private static GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-  private static BookService bookService;
 
   public static void main(String... args) {
 
     ctx.load("classpath:spring/app-context-annotation.xml");
     ctx.refresh();
-    bookService = ctx.getBean("springJpaBookService", BookService.class);
+    BookService bookService = ctx.getBean("springJpaBookService", BookService.class);
 
     Integer demo = 0; /* default is all of them */
 
@@ -50,7 +49,7 @@ public class PublishingApp {
       demoLookupBook();
     */
     if (demo == 0 || demo == 2)
-      demoFindAllBooks();
+      demoFindAllBooks(bookService);
     /*
     if (demo == 0 || demo == 3)
       demoCreateBook();
@@ -83,7 +82,7 @@ public class PublishingApp {
   }
   */
 
-  private static void demoFindAllBooks() {
+  private static void demoFindAllBooks(BookService bookService) {
     logger.info("------- Demo 2: Find all books without details");
 
     /* author #1 has multiple books */
