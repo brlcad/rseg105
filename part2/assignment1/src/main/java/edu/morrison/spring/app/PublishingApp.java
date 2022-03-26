@@ -80,10 +80,13 @@ public class PublishingApp {
     BookService bookService = ctx.getBean(BookService.class);
 
     Book newbook = new Book();
-    //    newbook.setCategory(3);
     newbook.setIsbn("978-0367505035");
     newbook.setTitle("Fundamentals of Computer Graphics");
     newbook.setPrice(126.0F);
+
+    Category newcat = new Category();
+    newcat.setName("Programming");
+    newbook.setCategory(newcat);
 
     Author newauthor = new Author();
     newauthor.setFirstName("Peter");
