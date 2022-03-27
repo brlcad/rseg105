@@ -79,10 +79,17 @@ public class PublishingApp {
   private static void demoDeleteBook() {
     logger.info("------- Demo 3: Delete a saved book and author(s) from the database");
 
+    logger.info("  ... listing books before ...");
+
+    List<Book> books = bookService.findAll();
+    for(Book b : books) {
+      logger.info(b.toString());
+    }
+
     Long id = 10L;
     Book bookById = bookService.findBookWithAuthorAndCategoryById(id);
     if (bookById != null) {
-      logger.info("  found book #10...");
+      logger.info("  found book #10... deleting it...");
       printBook(bookById);
       bookService.delete(bookById);
     } else {
@@ -95,6 +102,14 @@ public class PublishingApp {
     } else {
       logger.info("  ...unsuccessfully deleted book #10");
     }
+
+    logger.info("  ... listing books after ...");
+
+    books = bookService.findAll();
+    for(Book b : books) {
+      logger.info(b.toString());
+    }
+    
   }
 
 
