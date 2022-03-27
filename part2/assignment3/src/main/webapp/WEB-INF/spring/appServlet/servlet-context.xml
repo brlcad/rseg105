@@ -72,15 +72,15 @@
       class="org.springframework.web.multipart.support.StandardServletMultipartResolver"
       id="multipartResolver"/>
 
-<!--
   <beans:bean id="typeConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+<!--
     <beans:property name="formatters">
       <util:set>
         <beans:bean class="edu.morrison.spring.util.DateFormatter"/>
       </util:set>
     </beans:property>
-  </beans:bean>
 -->
+  </beans:bean>
 
   <!-- Defines basic MVC defaults (handler adapter, mapping, date formatting, etc) -->
   <annotation-driven conversion-service="typeConversionService" validator="validator"/>
