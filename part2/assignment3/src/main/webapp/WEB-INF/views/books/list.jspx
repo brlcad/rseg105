@@ -20,12 +20,17 @@
                 url:'${showBookUrl}/listgrid',
                 datatype: 'json',
                 mtype: 'GET',
-                colNames:['${labelBookCategory}', '${labelBookIsbn}',
-                    '${labelBookTitle}'],
+                colNames:['${labelBookCategory}',
+                          '${labelBookIsbn}',
+                          '${labelBookTitle}',
+                          '${labelBookPublisher}',
+                          '${labelBookPrice}' ],
                 colModel :[
-                    {name:'category', index:'category', width:100},
-                    {name:'isbn', index:'isbn', width:100},
-                    {name:'title', index:'title', width:150}
+                    {name:'category', index:'category', width:75},
+                    {name:'isbn', index:'isbn', width:75},
+                    {name:'title', index:'title', width:100},
+                    {name:'publisher', index:'publisher', width:75},
+                    {name:'price', index:'price', width:25}
                 ],
                 jsonReader : {
                     root:"bookData",
@@ -43,7 +48,7 @@
                 viewrecords: true,
                 gridview: true,
                 height: 250,
-                width: 500,
+                width: 650,
                 caption: '${labelBookList}',
                 onSelectRow: function(id){
                     document.location.href ="${showBookUrl}/" + id;
