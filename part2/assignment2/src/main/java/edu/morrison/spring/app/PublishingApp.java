@@ -91,7 +91,7 @@ public class PublishingApp {
   }
 
   private static void demoCreateBook(BookService bookService) {
-    logger.info("------- Demo 2: Create a new book with a new author(s)");
+    logger.info("------- Demo 3: Create a new book with a new author(s)");
 
     Book newbook = new Book();
     newbook.setIsbn("978-0367505035");
@@ -129,7 +129,7 @@ public class PublishingApp {
 
 
   private static void demoDeleteBook(BookService bookService) {
-    logger.info("------- Demo 3: Delete a saved book and author(s) from the database");
+    logger.info("------- Demo 4: Delete a saved book and author(s) from the database");
 
     List<Book> books;
     logger.info("  ... books before delete:");
