@@ -53,7 +53,7 @@
 
   <context:annotation-config/>
 
-  <jpa:repositories base-package="edu.morrison.spring.repos"
+  <jpa:repositories base-package="edu.morrison.spring.repository"
                     entity-manager-factory-ref="emf"
                     transaction-manager-ref="transactionManager"/>
 </beans>
