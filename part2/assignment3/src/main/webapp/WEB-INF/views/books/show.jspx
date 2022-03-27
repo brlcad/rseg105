@@ -38,7 +38,7 @@
       </tr>
       <tr>
         <td>${labelBookTitle}</td>
-        <td>${book.title}"/></td>
+        <td>${book.title}</td>
       </tr>
       <tr>
         <td>${labelBookPublisher}</td>
