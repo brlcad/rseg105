@@ -21,7 +21,7 @@ public class Book implements Serializable {
   private Long id;
 
   @Column(name = "CATEGORY_NAME")
-  private String categoryName;
+  private String category;
 
   @Column
   private String isbn;
