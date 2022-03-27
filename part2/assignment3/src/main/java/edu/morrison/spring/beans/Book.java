@@ -35,11 +35,6 @@ public class Book implements Serializable {
   @Column
   private Float price;
 
-  @Basic(fetch= FetchType.LAZY)
-  @Lob
-  @Column(name = "PHOTO")
-  private byte[] photo;
-
 
 	public Long getId() {
 		return id;
@@ -81,14 +76,6 @@ public class Book implements Serializable {
   }
   public void setPrice(Float price) {
     this.price = price;
-  }
-
-  public byte[] getPhoto() {
-    return photo;
-  }
-
-  public void setPhoto(byte[] photo) {
-    this.photo = photo;
   }
 
 

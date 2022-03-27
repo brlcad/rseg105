@@ -16,10 +16,7 @@
   <spring:message code="label_book_publisher" var="labelBookPublisher"/>
   <spring:message code="label_book_price" var="labelBookPrice"/>
   <spring:message code="label_book_update" var="labelBookUpdate"/>
-  <spring:message code="date_format_pattern" var="dateFormatPattern"/>
-  <spring:message code="label_book_photo" var="labelBookPhoto"/>
-
-  <spring:url value="/books/photo" var="bookPhotoUrl"/>
+  
   <spring:url value="/books" var="editBookUrl"/>
 
   <h1>${labelBookInfo}</h1>
@@ -50,10 +47,6 @@
       <tr>
         <td>${labelBookPrice}</td>
         <td>${book.price}</td>
-      </tr>
-      <tr>
-        <td>${labelBookPhoto}</td>
-        <td><img src="${bookPhotoUrl}/${book.id}"></img></td>
       </tr>
     </table>
 		

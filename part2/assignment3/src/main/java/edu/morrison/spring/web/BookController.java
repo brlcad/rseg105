@@ -90,7 +90,7 @@ public class BookController {
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public String create(@Valid Book book, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale, @RequestParam(value="file", required=false) Part file) {
+  public String create(@Valid Book book, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale) {
     logger.info("Creating book");
     if (bindingResult.hasErrors()) {
       uiModel.addAttribute("message", new Message("error",
@@ -104,38 +104,8 @@ public class BookController {
 
     logger.info("Book id: " + book.getId());
 
-    // Process upload file
-    if (file != null) {
-      logger.info("File name: " + file.getName());
-      logger.info("File size: " + file.getSize());
-      logger.info("File content type: " + file.getContentType());
-      byte[] fileContent = null;
-      try {
-        InputStream inputStream = file.getInputStream();
-        if (inputStream == null) logger.info("File inputstream is null");
-        fileContent = IOUtils.toByteArray(inputStream);
-        book.setPhoto(fileContent);
-      } catch (IOException ex) {
-        logger.error("Error saving uploaded file");
-      }
-      book.setPhoto(fileContent);
-    }
-
     bookService.save(book);
     return "redirect:/books/";
-  }
-
-  @RequestMapping(value = "/photo/{id}", method = RequestMethod.GET)
-  @ResponseBody
-  public byte[] downloadPhoto(@PathVariable("id") Long id) {
-    Book book = bookService.findById(id);
-
-    if (book.getPhoto() != null) {
-      logger.info("Downloading photo for id: {} with size: {}", book.getId(),
-                  book.getPhoto().length);
-    }
-
-    return book.getPhoto();
   }
 
   @PreAuthorize("isAuthenticated()")
