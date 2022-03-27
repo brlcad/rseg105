@@ -60,7 +60,7 @@
       <form:label path="publisher">
         ${labelBookPublisher}
       </form:label>
-      <form:textarea cols="60" rows="8" path="description" id="bookPublisher"/>
+      <form:textarea cols="60" rows="8" path="publisher" id="bookPublisher"/>
       <div>
         <form:errors path="publisher" cssClass="error" />
       </div>
