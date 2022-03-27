@@ -20,7 +20,7 @@
   </sec:authorize> 
 
   <sec:authorize access="isAnonymous()">
-    <!-- The Login Dialog is commented for Spring MVC Part1. It'll be uncommented for Spring MVC Part2 -->
+    <!-- The Login Dialog is commented for Spring MVC Part1. It'll be uncommented for Spring MVC Part2
     <div id="login">
       <form name="loginForm" action="${loginUrl}" method="post">
         <table>
@@ -40,5 +40,6 @@
         </table>
       </form>
     </div>
+    -->
   </sec:authorize> 
 </div>
