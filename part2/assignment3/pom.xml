@@ -4,7 +4,7 @@
 
   <groupId>edu.morrison.spring</groupId>
   <artifactId>part2.assignment3</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>part2-assignment3</name>
   
