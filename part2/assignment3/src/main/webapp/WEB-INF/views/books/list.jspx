@@ -7,7 +7,7 @@
     <jsp:output omit-xml-declaration="yes"/>
 
     <spring:message code="label_book_list" var="labelBookList"/>
-    <spring:message code="label_book_category_name" var="labelBookCategoryName"/>
+    <spring:message code="label_book_category" var="labelBookCategory"/>
     <spring:message code="label_book_isbn" var="labelBookIsbn"/>
     <spring:message code="label_book_title" var="labelBookTitle"/>
     <spring:message code="label_book_publisher" var="labelBookPublisher"/>
@@ -20,12 +20,12 @@
                 url:'${showBookUrl}/listgrid',
                 datatype: 'json',
                 mtype: 'GET',
-                colNames:['${labelBookCategoryName}', '${labelBookIsbn}',
+                colNames:['${labelBookCategory}', '${labelBookIsbn}',
                     '${labelBookTitle}'],
                 colModel :[
-                    {name:'categoryName', index:'categoryName', width:150},
+                    {name:'category', index:'category', width:100},
                     {name:'isbn', index:'isbn', width:100},
-                    {name:'title', index:'title', width:100}
+                    {name:'title', index:'title', width:150}
                 ],
                 jsonReader : {
                     root:"bookData",
@@ -38,7 +38,7 @@
                 pager: '#pager',
                 rowNum:10,
                 rowList:[10,20,30],
-                sortname: 'categoryName',
+                sortname: 'title',
                 sortorder: 'asc',
                 viewrecords: true,
                 gridview: true,
