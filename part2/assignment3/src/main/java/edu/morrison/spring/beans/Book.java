@@ -1,33 +1,28 @@
-
 package edu.morrison.spring.beans;
 
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-
-
 @Entity
-@Table(name = "BOOK")
+@Table(name = "book")
 public class Book implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "ID")
-	protected Long id;
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  @Column(name = "ID")
+  private Long id;
 
   @Column(name = "CATEGORY_NAME")
-  private String category;
+  private String categoryName;
 
   @Column
   private String isbn;
@@ -41,6 +36,18 @@ public class Book implements Serializable {
   @Column
   private Float price;
 
+  @Basic(fetch= FetchType.LAZY)
+  @Lob
+  @Column(name = "PHOTO")
+  private byte[] photo;
+
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
   public String getCategory() {
     return this.category;
@@ -75,6 +82,14 @@ public class Book implements Serializable {
   }
   public void setPrice(Float price) {
     this.price = price;
+  }
+
+  public byte[] getPhoto() {
+    return photo;
+  }
+
+  public void setPhoto(byte[] photo) {
+    this.photo = photo;
   }
 
 
