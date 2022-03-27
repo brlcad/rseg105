@@ -160,8 +160,8 @@ public class BookController {
     // Process order by
     Sort sort = null;
     String orderBy = sortBy;
-    if (orderBy != null && orderBy.equals("birthDateString"))
-      orderBy = "birthDate";
+    if (orderBy != null && orderBy.equals("titleString")) /* !!! verify */
+      orderBy = "title";
 
     if (orderBy != null && order != null) {
       if (order.equals("desc")) {
