@@ -29,13 +29,12 @@ public class BookServiceImpl implements BookService {
   @PersistenceContext
 	private EntityManager em;
 
-  /*
+
   @Transactional(readOnly = true)
   @Override
   public List<Book> findAll() {
-    return sessionFactory.getCurrentSession().createQuery("from Book b").list();
+    return em.createQuery("from Book b").getResultList();
   }
-  */
 
 	@Transactional(readOnly = true)
   @Override

@@ -101,6 +101,13 @@ public class PublishingApp {
   private static void demoCreateBook() {
     logger.info("------- Demo 2: Create a new book with a new author(s)");
 
+    logger.info("  ... listing books before ...");
+
+    List<Book> books = bookService.findAll();
+    for(Book b : books) {
+      logger.info(b.toString());
+    }
+
     Book newbook = new Book();
     newbook.setIsbn("978-0367505035");
     newbook.setTitle("Fundamentals of Computer Graphics");
@@ -119,9 +126,17 @@ public class PublishingApp {
     authors.add(newauthor);
     newbook.setAuthors(authors);
 
+    logger.info("  ... adding this book:");
+    logger.info(newbook.toString());
+
     bookService.save(newbook);
 
-    logger.info("  ...successfully added book");
+    logger.info("  ... successfully added book");
+    logger.info("  ... listing books after ...");
+    books = bookService.findAll();
+    for(Book b : books) {
+      logger.info(b.toString());
+    }
   }
 
 

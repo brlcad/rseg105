@@ -11,10 +11,7 @@ public interface BookService {
 
   Book save(Book book);
 
-  /*
   List<Book> findAll();
-  */
-
   List<Book> findAllBooksByAuthorId(Long id);
   Book findBookWithAuthorAndCategoryById(Long id);
   Category findCategoryByName(String name);
