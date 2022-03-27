@@ -51,9 +51,9 @@
       <form:label path="title">
         ${labelBookTitle}
       </form:label>
-      <form:input path="birthTitle" id="birthTitle"/>
+      <form:input path="title" id="title"/>
       <div>
-        <form:errors path="birthTitle" cssClass="error" />
+        <form:errors path="title" cssClass="error" />
       </div>
       <p/>
 
@@ -73,12 +73,6 @@
       <div>
         <form:errors path="price" cssClass="error" />
       </div>
-      <p/>
-
-      <label for="file">
-        ${labelBookPhoto}
-      </label>
-      <input name="file" type="file"/>
       <p/>
 
       <form:hidden path="version" />
